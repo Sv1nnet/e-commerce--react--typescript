@@ -134,6 +134,7 @@ module.exports = {
   devServer: {
     port: 4200,
     open: true,
+    historyApiFallback: true,
     hot: isDev, // update changes without reloading page
   },
   devtool: isDev ? 'source-map' : '',
