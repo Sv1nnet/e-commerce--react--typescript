@@ -1,6 +1,7 @@
 import { TState, TAction } from './src/reducers/types';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, Store, Action } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -14,8 +15,10 @@ const composeEnhancers = composeWithDevTools(applyMiddleware(thunk));
 const store: Store<TState, Action<TAction>> = createStore(rootReducer, composeEnhancers);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );

@@ -86,11 +86,12 @@ const plugins = () => {
       minify: {
         collapseWhitespace: isProd, // remove whitespace from .html file
       },
+      inject: false,
     }),
     new CleanWebpackPlugin(), // clean dist from old files
     new CopyWebpackPlugin([ // Copy any files
       {
-        from: path.resolve(__dirname, 'src/favicon.ico'),
+        from: path.resolve(__dirname, 'src/fav.ico'),
         to: path.resolve(__dirname, 'dist'),
       },
     ]),
@@ -135,6 +136,7 @@ module.exports = {
     port: 4200,
     open: true,
     historyApiFallback: true,
+    contentBase: path.resolve(__dirname, 'src'),
     hot: isDev, // update changes without reloading page
   },
   devtool: isDev ? 'source-map' : '',
