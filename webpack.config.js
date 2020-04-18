@@ -73,7 +73,15 @@ const jsLoaders = () => {
   }];
 
   if (isDev) {
-    loaders = [...loaders, 'eslint-loader']; // add eslint-loader to check for warnings and errors
+    loaders = [
+      ...loaders,
+      {
+        loader: 'eslint-loader',
+        options: {
+          eslintPath: path.resolve(__dirname, 'eslintrc.json'),
+        },
+      },
+    ]; // add eslint-loader to check for warnings and errors
   }
 
   return loaders;
@@ -111,7 +119,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'), // Initial folder
   mode: 'development', // default build mode
   entry: { // files where webpack starts building
-    main: ['@babel/polyfill', '../index.tsx'], // 'name of final file': 'paths to files'
+    main: ['../index.tsx'], // 'name of final file': 'paths to files'
   },
   output: {
     filename: filename('js'), // [name] - name of entry field; [contenthash] - file hash;
@@ -169,18 +177,21 @@ module.exports = {
         use: jsLoaders(),
       },
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: babelOptions('@babel/preset-typescript'),
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOptions('@babel/preset-typescript'),
+          },
+          'ts-loader',
+        ],
       },
-      {
-        test: /\.tsx$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader'],
-      },
+      // {
+      //   test: /\.tsx$/,
+      //   exclude: /node_modules/,
+      //   use: ['babel-loader', 'ts-loader'],
+      // },
       // {
       //   test: /\.jsx$/,
       //   exclude: /node_modules/,
