@@ -1,12 +1,11 @@
 export type TState = {
-  user: string;
   cart: ICart;
-}
+};
 
 export type TAction = {
   type: string;
   data: any;
-}
+};
 
 export interface ICart {
   products: IProduct[];

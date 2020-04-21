@@ -135,7 +135,8 @@ module.exports = {
       '.pmg',
     ],
     alias: { // path names for import; in import we can specify alias instead of relative path
-      '@models': path.resolve(__dirname, 'src/models'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@style': path.resolve(__dirname, 'src/style'),
       '@': path.resolve(__dirname, 'src'),
     },
   },

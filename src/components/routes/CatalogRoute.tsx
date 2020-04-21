@@ -4,8 +4,16 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import CatalogPage from '../pages/CatalogPage';
 import Catalog from '../catalog/Catalog';
 
-const CatalogRoute: React.FC = () => {
-  const match = useRouteMatch();
+type Match = {
+  url: string;
+};
+
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const CatalogRoute: React.FC<IProps> = () => {
+  const match = useRouteMatch<Match>();
 
   return (
     <CatalogPage>
@@ -19,6 +27,6 @@ const CatalogRoute: React.FC = () => {
       </Switch>
     </CatalogPage>
   );
-}
+};
 
 export default CatalogRoute;

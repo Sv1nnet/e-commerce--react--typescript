@@ -3,7 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import CheckoutPage from '../pages/CheckoutPage';
 import Checkout from '../checkout/Checkout';
 
-const CheckoutRoute: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const CheckoutRoute: React.FC<IProps> = () => {
   return (
     <CheckoutPage>
       <Switch>
@@ -13,6 +17,6 @@ const CheckoutRoute: React.FC = () => {
       </Switch>
     </CheckoutPage>
   );
-}
+};
 
 export default CheckoutRoute;

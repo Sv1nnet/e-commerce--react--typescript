@@ -1,12 +1,18 @@
 import React from 'react';
 
-const CheckoutPage: React.FC = (props) => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const CheckoutPage: React.FC<IProps> = (props) => {
+  const { children } = props;
+
   return (
     <>
       <h2>Checkout Page</h2>
-      {props.children}
+      {children}
     </>
   );
-}
+};
 
 export default CheckoutPage;

@@ -1,12 +1,18 @@
 import React from 'react';
 
-const MainPage: React.FC = (props) => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const MainPage: React.FC<IProps> = (props) => {
+  const { children } = props;
+
   return (
     <>
       <h2>Catalog Main</h2>
-      {props.children}
+      {children}
     </>
   );
-}
+};
 
 export default MainPage;

@@ -1,11 +1,16 @@
 {
   "eslint.enable" : true,
   "eslint.workingDirectories": [
-    {"mode": "auto"}
+    {
+      "mode": "auto"
+    }
   ],
   "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.options": {
-    "configFile": "eslintrc.json",
+    "configFile": ".vscode/eslintrc.json",
     "linebreak-style": ["", "windows"]
+  },
+  "[typescriptreact]": {
+    
   }
 }

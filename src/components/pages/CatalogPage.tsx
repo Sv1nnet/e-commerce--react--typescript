@@ -1,12 +1,18 @@
 import React from 'react';
 
-const CatalogPage: React.FC = (props) => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const CatalogPage: React.FC<IProps> = (IProps) => {
+  const { children } = IProps;
+
   return (
     <>
       <h2>Catalog Page</h2>
-      {props.children}
+      {children}
     </>
   );
-}
+};
 
 export default CatalogPage;

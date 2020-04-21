@@ -1,12 +1,18 @@
 import React from 'react';
 
-const BasketPage: React.FC = (props) => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const BasketPage: React.FC<IProps> = (IProps) => {
+  const { children } = IProps;
+
   return (
     <>
       <h2>Basket Page</h2>
-      {props.children}
+      {children}
     </>
   );
-}
+};
 
 export default BasketPage;

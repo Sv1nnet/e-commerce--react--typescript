@@ -4,7 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
 import Main from '../main/Main';
 
-const MainRoute: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const MainRoute: React.FC<IProps> = () => {
   return (
     <MainPage>
       <Switch>
@@ -14,6 +18,6 @@ const MainRoute: React.FC = () => {
       </Switch>
     </MainPage>
   );
-}
+};
 
 export default MainRoute;

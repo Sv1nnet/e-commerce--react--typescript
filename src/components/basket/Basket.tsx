@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Basket: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const Basket: React.FC<IProps> = () => {
   return (
     <h2>Basket</h2>
   );
-}
+};
 
 export default Basket;

@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Catalog: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const Catalog: React.FC<IProps> = () => {
   return (
     <h2>Catalog</h2>
   );
-}
+};
 
 export default Catalog;

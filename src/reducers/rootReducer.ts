@@ -2,16 +2,15 @@ import { Reducer } from 'redux';
 import { TState } from './types';
 
 const initialState: TState = {
-  user: 'username',
   cart: {
     products: [],
     total: 0,
   },
-}
+};
 
-const rootReducer: Reducer<TState> = (state = initialState, action) =>{
+const rootReducer: Reducer<TState> = (state = initialState, action) => {
   switch (action.type) {
-    case 'any': 
+    case 'any':
       return state;
     default:
       return state;

@@ -1,16 +1,27 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Logo from '../ui/logo/Logo';
+import BasketButton from '../ui/buttons/basketButton/BasketButton';
 
-const Navigation: React.FC = () => {
-  return (
-    <nav>
-      
-      <NavLink to="/basket">Basket</NavLink>
-      <NavLink to="/checkout">Checkout</NavLink>
-      <NavLink to="/catalog">Catalog</NavLink>
+import './style.scss';
 
-    </nav>
-  );
+
+interface IProps {
+  children?: React.ReactNode;
+  className?: string;
 }
+
+const Navigation: React.FC<IProps> = ({ className }) => (
+  <nav className={`Navigation ${className || ''}`}>
+    <div className="Navigation__inner">
+
+      <Logo />
+
+      <div className="Navigation__button-container">
+        <BasketButton />
+      </div>
+
+    </div>
+  </nav>
+);
 
 export default Navigation;

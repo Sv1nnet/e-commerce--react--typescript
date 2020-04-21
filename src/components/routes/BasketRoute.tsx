@@ -4,16 +4,20 @@ import { Switch, Route } from 'react-router-dom';
 import BasketPage from '../pages/BasketPage';
 import Basket from '../basket/Basket';
 
-const BasketRoute: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode;
+}
+
+const BasketRoute: React.FC<IProps> = () => {
   return (
     <BasketPage>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/basket">
           <Basket />
         </Route>
       </Switch>
     </BasketPage>
   );
-}
+};
 
 export default BasketRoute;
