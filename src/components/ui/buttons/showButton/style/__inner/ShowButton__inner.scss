@@ -10,11 +10,11 @@ $border-size: 20px;
     content: '';
     position: absolute;
     top: 0;
-    left: -40px;
+    left: -30px;
     box-sizing: border-box;
     display: block;
     border-top: $border-size solid transparent;
-    border-right: $border-size solid $main-color;
+    border-right: 10px solid $main-color;
     border-left: $border-size solid transparent;
     border-bottom: $border-size solid transparent;
   }
