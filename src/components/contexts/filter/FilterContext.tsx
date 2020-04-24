@@ -13,10 +13,10 @@ export interface IFilterResult {
   };
 }
 
-export type IUpdateFilter = (newFilter: IFilterResult) => void;
+export type TUpdateFilter = (newFilter: IFilterResult) => void;
 export interface IContextValue {
   filterData: IFilterResult,
-  updateFilter: IUpdateFilter,
+  updateFilter: TUpdateFilter,
 }
 
 interface IProps {
@@ -50,7 +50,7 @@ const FilterContextProvider: React.FC<IProps> = (props) => {
     },
   });
 
-  const updateFilter: IUpdateFilter = (newFilter) => {
+  const updateFilter: TUpdateFilter = (newFilter) => {
     setFilterResult(newFilter);
   };
 
