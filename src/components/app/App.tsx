@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Navigation from '@components/navigation/Navigation';
 import MainSection from '@components/mainSection/MainSection';
@@ -8,18 +8,21 @@ import './style.scss';
 
 
 interface IProps {
-  children?: React.ReactNode;
+
 }
 
-const App: React.FC<IProps> = () => (
-  <div className="App">
-    <Navigation />
 
-    <div className="App__inner">
-      <SideBar />
-      <MainSection />
+const App: React.FC<IProps> = () => {
+  return (
+    <div className="App">
+      <Navigation />
+
+      <div className="App__inner">
+        <SideBar />
+        <MainSection />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default App;
