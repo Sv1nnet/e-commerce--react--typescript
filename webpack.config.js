@@ -142,6 +142,7 @@ module.exports = {
   },
   optimization: optimization(), // allows to move multiple imports in a single separated file
   devServer: {
+    host: '192.168.0.11',
     port: 4200,
     open: true,
     historyApiFallback: true,
