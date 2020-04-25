@@ -50,15 +50,11 @@ const FilterContextProvider: React.FC<IProps> = (props) => {
     },
   });
 
-  const updateFilter: TUpdateFilter = (newFilter) => {
-    setFilterResult(newFilter);
-  };
-
   return (
     <FilterContext.Provider
       value={{
         filterData: filterResult,
-        updateFilter,
+        updateFilter: setFilterResult,
       }}
     >
       {children}

@@ -8,11 +8,11 @@ $border-size: 20px;
 
   &:after {
     content: '';
+    display: block;
     position: absolute;
     top: 0;
     left: -30px;
     box-sizing: border-box;
-    display: block;
     border-top: $border-size solid transparent;
     border-right: 10px solid $main-color;
     border-left: $border-size solid transparent;

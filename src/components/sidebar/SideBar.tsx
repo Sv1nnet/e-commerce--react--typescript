@@ -21,7 +21,7 @@ const SideBar: React.FC<IProps> = () => {
 
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
   const [filter, setFilter] = useState<IFilterResult>(filterData);
-  const [showButtonRelatedElementData, setShowButtonPosition] = useState<IRelatedElement>({ top: 0, height: 0 });
+  const [showButtonRelatedElementData, setShowButtonRelatedElementData] = useState<IRelatedElement>({ top: 0, height: 0 });
 
   const asideRef = useRef<HTMLElement>(null);
 
@@ -30,7 +30,7 @@ const SideBar: React.FC<IProps> = () => {
     const inputContainer = document.querySelector<HTMLElement>(`label[for=${target.id}]`) || target;
 
     setFilterChanged(true);
-    setShowButtonPosition(() => {
+    setShowButtonRelatedElementData(() => {
       const inputBoundingClientRect = inputContainer.getBoundingClientRect();
       const inputTop = inputBoundingClientRect.top;
       const inputHeight = inputContainer.offsetHeight;
