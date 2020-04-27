@@ -1,8 +1,9 @@
 @import '@style/vars/shadows.scss';
 
-.SideBar {
-  width: 250px;
+.SimpleButton {
+  flex-basis: 100%;
   background-color: white;
   border-radius: 4px;
+  border: none;
   box-shadow: $main-block-shadow;
 }

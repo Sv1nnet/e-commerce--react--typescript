@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import Checkbox from '@components/ui/inputs/checkbox/Checkbox';
 import Rollup from '@components/ui/rollup/Rollup';
 import TextInput from '@components/ui/inputs/text/TextInput';
@@ -6,24 +7,40 @@ import TextInput from '@components/ui/inputs/text/TextInput';
 import { FilterContext, IFilterResult, IContextValue } from '@components/contexts/filter/FilterContext';
 import { IRelatedElement } from '@components/ui/buttons/showButton/ShowButton';
 import ShowButton from '../ui/buttons/showButton/ShowButton';
+import SimpleButton from '../ui/buttons/simpleButton/SimpleButton';
+import ModalBg from '../modalBg/ModalBg';
+import CloseButton from '../ui/buttons/closeButton/CloseButton';
 
 import filterChangeHandler from './utils/filterChangeHandler';
 
 import './style.scss';
+import './style/__apply-button/SideBar__apply-button.scss';
+import './style/__apply-button/_md/SideBar__apply-button_md_active.scss';
+import './style/__apply-button-text/SideBar__apply-button-text.scss';
+import './style/_md/SideBar_md_active.scss';
+import './style/_md/SideBar_md_inactive.scss';
+// import './style/__close-button/SideBar__close-button.scss';
 
 
 interface IProps {
+  showSideBar: React.Dispatch<React.SetStateAction<boolean>>;
+  isSideBarActiveOnMediumScreen: boolean;
+  className?: string;
 }
 
 
-const SideBar: React.FC<IProps> = () => {
+const SideBar: React.FC<IProps> = ({
+  showSideBar,
+  isSideBarActiveOnMediumScreen,
+  className,
+}) => {
   const { filterData, updateFilter } = useContext<IContextValue>(FilterContext);
 
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
   const [filter, setFilter] = useState<IFilterResult>(filterData);
   const [showButtonRelatedElementData, setShowButtonRelatedElementData] = useState<IRelatedElement>({ top: 0, height: 0 });
 
-  const asideRef = useRef<HTMLElement>(null);
+  const sideBarRef = useRef<HTMLDivElement>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
@@ -31,15 +48,11 @@ const SideBar: React.FC<IProps> = () => {
 
     setFilterChanged(true);
     setShowButtonRelatedElementData(() => {
-      const inputBoundingClientRect = inputContainer.getBoundingClientRect();
-      const inputTop = inputBoundingClientRect.top;
+      const inputTop = inputContainer.offsetTop;
       const inputHeight = inputContainer.offsetHeight;
-      const asideTop = asideRef?.current?.offsetTop || 0;
-
-      const buttonTop = inputTop - asideTop;
 
       return {
-        top: buttonTop,
+        top: inputTop,
         height: inputHeight,
       };
     });
@@ -53,116 +66,138 @@ const SideBar: React.FC<IProps> = () => {
     });
   };
 
+  const hideSideBar = () => {
+    showSideBar(false);
+  };
+
   const submitFilterChange: () => void = () => {
     updateFilter(filter);
     setFilterChanged(false);
   };
 
   return (
-    <aside ref={asideRef} className="SideBar App__sidebar">
-      <div className="SideBar__inner">
+    <>
+      <aside>
+        <div ref={sideBarRef} className={`SideBar ${className || ''} App__sidebar`}>
+          <div className="SideBar__inner">
 
-        <div className="SideBar__checkbox-wrapper">
-          <Checkbox
-            data={{ 'data-filter-type': 'discount' }}
-            className="SideBar__checkbox"
-            text="Discount"
-            name="discount"
-            id="discount"
-            onChange={onChange}
-          />
-        </div>
+            <CloseButton className="SideBar__close-button" onClick={hideSideBar} />
 
-        <Rollup className="SideBar__rollup" header="Price">
-          <div className="SideBar__price-rollup">
-            <div className="SideBar__price-wrapper">
-              <TextInput
-                className="App__text-input"
-                data={{ 'data-filter-type': 'price', 'data-price-type': 'from' }}
-                id="price-from"
-                placeholder="from"
-                value={filter.price[0]}
+            <div className="SideBar__checkbox-wrapper">
+              <Checkbox
+                data={{ 'data-filter-type': 'discount' }}
+                className="SideBar__checkbox"
+                text="Discount"
+                name="discount"
+                id="discount"
                 onChange={onChange}
               />
             </div>
-            <div className="SideBar__price-wrapper">
-              <TextInput
-                className="App__text-input"
-                data={{ 'data-filter-type': 'price', 'data-price-type': 'upto' }}
-                id="price-upto"
-                placeholder="upto"
-                value={filter.price[1]}
+
+            <Rollup className="SideBar__rollup" header="Price">
+              <div className="SideBar__price-rollup">
+                <div className="SideBar__price-wrapper">
+                  <TextInput
+                    className="App__text-input"
+                    data={{ 'data-filter-type': 'price', 'data-price-type': 'from' }}
+                    id="price-from"
+                    placeholder="from"
+                    value={filter.price[0]}
+                    onChange={onChange}
+                  />
+                </div>
+                <div className="SideBar__price-wrapper">
+                  <TextInput
+                    className="App__text-input"
+                    data={{ 'data-filter-type': 'price', 'data-price-type': 'upto' }}
+                    id="price-upto"
+                    placeholder="upto"
+                    value={filter.price[1]}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+            </Rollup>
+
+            <Rollup className="SideBar__rollup" header="Brand">
+              <Checkbox
+                data={{ 'data-filter-type': 'brands' }}
+                className="Rollup__item"
+                text="Apple"
+                name="Apple"
+                id="apple"
                 onChange={onChange}
               />
-            </div>
+              <Checkbox
+                data={{ 'data-filter-type': 'brands' }}
+                className="Rollup__item"
+                text="FinePower"
+                name="FinePower"
+                id="finepower"
+                onChange={onChange}
+              />
+              <Checkbox
+                data={{ 'data-filter-type': 'brands' }}
+                className="Rollup__item"
+                text="Samsung"
+                name="Samsung"
+                id="samsung"
+                onChange={onChange}
+              />
+              <Checkbox
+                data={{ 'data-filter-type': 'brands' }}
+                className="Rollup__item"
+                text="Xiaomi"
+                name="Xiaomi"
+                id="xiaomi"
+                onChange={onChange}
+              />
+            </Rollup>
+
+            <Rollup className="SideBar__rollup" header="Type">
+              <Checkbox
+                data={{ 'data-filter-type': 'type' }}
+                className="Rollup__item"
+                text="Buttons"
+                name="buttons"
+                id="buttons"
+                onChange={onChange}
+              />
+              <Checkbox
+                data={{ 'data-filter-type': 'type' }}
+                className="Rollup__item"
+                text="Touch screen"
+                name="touchscreen"
+                id="touchscreen"
+                onChange={onChange}
+              />
+            </Rollup>
+
+            <SimpleButton
+              className="SideBar__apply-button SideBar__apply-button_md_active"
+              textClassName="SideBar__apply-button-text"
+              text="Apply"
+              onClick={submitFilterChange}
+            />
+
           </div>
-        </Rollup>
 
-        <Rollup className="SideBar__rollup" header="Brand">
-          <Checkbox
-            data={{ 'data-filter-type': 'brands' }}
-            className="Rollup__item"
-            text="Apple"
-            name="Apple"
-            id="apple"
-            onChange={onChange}
-          />
-          <Checkbox
-            data={{ 'data-filter-type': 'brands' }}
-            className="Rollup__item"
-            text="FinePower"
-            name="FinePower"
-            id="finepower"
-            onChange={onChange}
-          />
-          <Checkbox
-            data={{ 'data-filter-type': 'brands' }}
-            className="Rollup__item"
-            text="Samsung"
-            name="Samsung"
-            id="samsung"
-            onChange={onChange}
-          />
-          <Checkbox
-            data={{ 'data-filter-type': 'brands' }}
-            className="Rollup__item"
-            text="Xiaomi"
-            name="Xiaomi"
-            id="xiaomi"
-            onChange={onChange}
-          />
-        </Rollup>
+          {filterChanged && (
+            <ShowButton
+              className="SideBar__show-button"
+              onClick={submitFilterChange}
+              shouldCenter
+              related={showButtonRelatedElementData}
+            />
+          )}
+        </div>
+      </aside>
 
-        <Rollup className="SideBar__rollup" header="Type">
-          <Checkbox
-            data={{ 'data-filter-type': 'type' }}
-            className="Rollup__item"
-            text="Buttons"
-            name="buttons"
-            id="buttons"
-            onChange={onChange}
-          />
-          <Checkbox
-            data={{ 'data-filter-type': 'type' }}
-            className="Rollup__item"
-            text="Touch screen"
-            name="touchscreen"
-            id="touchscreen"
-            onChange={onChange}
-          />
-        </Rollup>
-
-      </div>
-
-      {filterChanged && (
-        <ShowButton
-          className="SideBar__show-button"
-          onClick={submitFilterChange}
-          shouldCenter
-          related={showButtonRelatedElementData}
-        />
+      {isSideBarActiveOnMediumScreen && ReactDOM.createPortal(
+        <ModalBg onClick={hideSideBar} className="SideBar__modal-bg" />,
+        document.querySelector('.App')! || document.body,
       )}
-    </aside>
+    </>
   );
 };
 
