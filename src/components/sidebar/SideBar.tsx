@@ -70,7 +70,17 @@ const SideBar: React.FC<IProps> = ({
   };
 
   const submitFilterChange: () => void = () => {
-    updateFilter(filter);
+    // console.log('submit');
+    updateFilter(() => {
+      const [priceFrom, priceUpto] = filter.price;
+      const newFilter = { ...filter };
+
+      if (!!priceUpto && !!priceFrom && priceUpto < priceFrom) {
+        [newFilter.price[1], newFilter.price[0]] = [newFilter.price[0], newFilter.price[1]];
+        setFilter(newFilter);
+      }
+      return newFilter;
+    });
     setFilterChanged(false);
   };
 

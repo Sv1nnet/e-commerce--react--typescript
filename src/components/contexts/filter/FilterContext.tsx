@@ -13,7 +13,7 @@ export interface IFilterResult {
   };
 }
 
-export type TUpdateFilter = (newFilter: IFilterResult) => void;
+export type TUpdateFilter = React.Dispatch<React.SetStateAction<IFilterResult>>;
 export interface IContextValue {
   filterData: IFilterResult,
   updateFilter: TUpdateFilter,
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 
-export const FilterContext = createContext<IContextValue>({
+const defaultContextValue: IContextValue = {
   filterData: {
     discount: false,
     price: ['', ''],
@@ -35,7 +35,9 @@ export const FilterContext = createContext<IContextValue>({
     },
   },
   updateFilter: () => {},
-});
+};
+
+export const FilterContext = createContext<IContextValue>(defaultContextValue);
 
 const FilterContextProvider: React.FC<IProps> = (props) => {
   const { children } = props;

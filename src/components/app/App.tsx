@@ -6,6 +6,7 @@ import SideBar from '@components/sidebar/SideBar';
 import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
 
 import './style.scss';
+import FilterContextProvider from '../contexts/filter/FilterContext';
 
 
 interface IProps {
@@ -21,18 +22,21 @@ const App: React.FC<IProps> = () => {
       <Navigation />
 
       <div className="App__inner">
-        <SimpleButton
-          text="Filter"
-          className="App__filter-button"
-          onClick={() => { setSideBarActiveOnMediumScreen((prevState) => !prevState); }}
-        />
+        <FilterContextProvider>
+          <SimpleButton
+            text="Filter"
+            className="App__filter-button"
+            onClick={() => { setSideBarActiveOnMediumScreen((prevState) => !prevState); }}
+          />
 
-        <SideBar
-          showSideBar={setSideBarActiveOnMediumScreen}
-          isSideBarActiveOnMediumScreen={isSideBarActiveOnMediumScreen}
-          className={`${isSideBarActiveOnMediumScreen ? 'SideBar_md_active' : 'SideBar_md_inactive'}`}
-        />
-        <MainSection />
+          <SideBar
+            showSideBar={setSideBarActiveOnMediumScreen}
+            isSideBarActiveOnMediumScreen={isSideBarActiveOnMediumScreen}
+            className={`${isSideBarActiveOnMediumScreen ? 'SideBar_md_active' : 'SideBar_md_inactive'}`}
+          />
+
+          <MainSection />
+        </FilterContextProvider>
       </div>
     </div>
   );

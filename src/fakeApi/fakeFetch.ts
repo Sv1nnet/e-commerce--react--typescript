@@ -115,6 +115,11 @@ const handlePayReq: () => IRes = () => ({
   data: {},
 });
 
+/**
+ * Send simulated requested to a server and get result as Promise<IRes>.
+ * @param route '/' or '/catalog' or '/pay'
+ * @returns IRes is { status: number, text: 'OK', data: items | {}}
+ */
 const fakeFetch: (route: TRoute, data?: IFilterResult | IPaymentData) => Promise<IRes> = (route, data) => {
   if (route === routes.pay && !data) {
     throw new Error('Data has to be provided to make a payment');
