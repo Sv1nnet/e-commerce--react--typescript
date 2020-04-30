@@ -19,7 +19,6 @@ import './style/__apply-button/_md/SideBar__apply-button_md_active.scss';
 import './style/__apply-button-text/SideBar__apply-button-text.scss';
 import './style/_md/SideBar_md_active.scss';
 import './style/_md/SideBar_md_inactive.scss';
-// import './style/__close-button/SideBar__close-button.scss';
 
 
 interface IProps {
