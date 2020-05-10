@@ -14,11 +14,6 @@ import CloseButton from '../ui/buttons/closeButton/CloseButton';
 import filterChangeHandler from './utils/filterChangeHandler';
 
 import './style.scss';
-import './style/__apply-button/SideBar__apply-button.scss';
-import './style/__apply-button/_md/SideBar__apply-button_md_active.scss';
-import './style/__apply-button-text/SideBar__apply-button-text.scss';
-import './style/_md/SideBar_md_active.scss';
-import './style/_md/SideBar_md_inactive.scss';
 
 
 interface IProps {
@@ -28,11 +23,7 @@ interface IProps {
 }
 
 
-const SideBar: React.FC<IProps> = ({
-  showSideBar,
-  isSideBarActiveOnMediumScreen,
-  className,
-}) => {
+const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen, className }) => {
   const { filterData, updateFilter } = useContext<IContextValue>(FilterContext);
 
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
@@ -70,7 +61,6 @@ const SideBar: React.FC<IProps> = ({
   };
 
   const submitFilterChange: () => void = () => {
-    // console.log('submit');
     updateFilter(() => {
       const [priceFrom, priceUpto] = filter.price;
       const newFilter = { ...filter };

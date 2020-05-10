@@ -9,13 +9,18 @@
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
-    "test": "mocha --require ts-node/register src/**/*.spec.ts"
+    "test": "mocha --require ts-node/register --project tsconfig.ts src/**/*.spec.ts"
   },
   "browserslist": "> 0.25%, not dead",
   "keywords": [
     "js",
     "webpack"
   ],
+  "_moduleAliases": {
+    "@": "src",
+    "@style": "src/style",
+    "@components": "src/components"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -69,6 +74,7 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-redux": "^7.1.7",
+    "module-alias": "^2.2.2",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

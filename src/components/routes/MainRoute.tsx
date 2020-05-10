@@ -1,14 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import MainPage from '../pages/MainPage';
+import { TMappedDispatch } from '@components/app/App';
+import MainPage from '@components/pages/mainPage/MainPage';
 import Main from '../main/Main';
 
-interface IProps {
+
+interface IProps extends TMappedDispatch {
   children?: React.ReactNode;
 }
 
-const MainRoute: React.FC<IProps> = () => {
+const MainRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
   return (
     <MainPage>
       <Switch>

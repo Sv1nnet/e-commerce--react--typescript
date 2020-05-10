@@ -19,7 +19,7 @@ interface IFiltered {
   [key: string]: IItem[] | undefined;
 }
 
-interface IPaymentData {
+export interface IPaymentData {
   address: string;
   phone: string;
   itemIds: string[];
@@ -29,7 +29,7 @@ export interface IData {
   [key: string]: any;
 }
 
-interface IRes {
+export interface IRes {
   status: number;
   text: string;
   data: {} | IData;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './style.scss';
+
 interface IProps {
   children?: React.ReactNode;
 }
@@ -8,10 +10,9 @@ const MainPage: React.FC<IProps> = (props) => {
   const { children } = props;
 
   return (
-    <>
-      <h2>Catalog Main</h2>
+    <div className="MainPage">
       {children}
-    </>
+    </div>
   );
 };
 

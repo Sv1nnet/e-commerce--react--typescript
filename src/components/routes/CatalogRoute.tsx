@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
+import { TMappedDispatch } from '@components/app/App';
 import CatalogPage from '../pages/CatalogPage';
 import Catalog from '../catalog/Catalog';
 
@@ -8,11 +9,12 @@ type Match = {
   url: string;
 };
 
-interface IProps {
+
+interface IProps extends TMappedDispatch {
   children?: React.ReactNode;
 }
 
-const CatalogRoute: React.FC<IProps> = () => {
+const CatalogRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
   const match = useRouteMatch<Match>();
 
   return (
