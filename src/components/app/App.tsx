@@ -25,8 +25,8 @@ export type TMappedDispatch = {
 };
 
 type TMapDispatchToProps = (dispatch: ThunkDispatch<TState, undefined, IAddToCartAction | IRemoveFromCartAction>) => TMappedDispatch;
-type TAddToCart = (product: IProduct) => void;
-type TRemoveFromCart = (id: string) => void;
+export type TAddToCart = (product: IProduct) => void;
+export type TRemoveFromCart = (id: string) => void;
 
 type IProps = ReturnType<typeof mapDispatchToProps> & {};
 
@@ -52,7 +52,11 @@ const App: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
             className={`${isSideBarActiveOnMediumScreen ? 'SideBar_md_active' : 'SideBar_md_inactive'}`}
           />
 
-          <MainSection addToCart={addToCart} removeFromCart={removeFromCart} />
+          <MainSection
+            className="App__main-section"
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+          />
         </FilterContextProvider>
       </div>
     </div>

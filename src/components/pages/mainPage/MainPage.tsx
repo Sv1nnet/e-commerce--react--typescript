@@ -11,7 +11,9 @@ const MainPage: React.FC<IProps> = (props) => {
 
   return (
     <div className="MainPage">
-      {children}
+      <div className="MainPage__inner">
+        {children}
+      </div>
     </div>
   );
 };

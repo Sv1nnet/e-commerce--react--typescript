@@ -15,7 +15,7 @@ const MainRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
     <MainPage>
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Main addToCart={addToCart} removeFromCart={removeFromCart} />
         </Route>
       </Switch>
     </MainPage>

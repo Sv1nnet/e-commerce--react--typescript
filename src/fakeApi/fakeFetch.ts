@@ -1,4 +1,5 @@
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
+import { IProduct } from '@/reducers/types';
 import { allItems, mainItems } from './stringifiedItems';
 
 
@@ -19,6 +20,10 @@ interface IFiltered {
   [key: string]: IItem[] | undefined;
 }
 
+export interface IProductsRes {
+  [key: string]: IProduct[];
+}
+
 export interface IPaymentData {
   address: string;
   phone: string;
@@ -29,10 +34,10 @@ export interface IData {
   [key: string]: any;
 }
 
-export interface IRes {
+export interface IRes<T> {
   status: number;
   text: string;
-  data: {} | IData;
+  data: T;
 }
 
 
@@ -42,7 +47,7 @@ const routes = {
   pay: '/pay',
 };
 
-const handleCatalogReq: (filter: any) => IRes = (filter = {
+const handleCatalogReq: (filter: any) => IRes<IFiltered> = (filter = {
   discount: false,
   price: ['', ''],
   brands: [],
@@ -103,30 +108,31 @@ const handleCatalogReq: (filter: any) => IRes = (filter = {
   };
 };
 
-const handleMainReq: () => IRes = () => ({
+const handleMainReq: () => IRes<IProductsRes> = () => ({
   status: 200,
   text: 'OK',
   data: JSON.parse(mainItems),
 });
 
-const handlePayReq: () => IRes = () => ({
+const handlePayReq: () => IRes<{}> = () => ({
   status: 200,
   text: 'OK',
   data: {},
 });
 
+type TFakeFetch = <T>(route: TRoute, data?: IFilterResult | IPaymentData) => Promise<IRes<T>>;
 /**
  * Send simulated requested to a server and get result as Promise<IRes>.
  * @param route '/' or '/catalog' or '/pay'
  * @returns IRes is { status: number, text: 'OK', data: items | {}}
  */
-const fakeFetch: (route: TRoute, data?: IFilterResult | IPaymentData) => Promise<IRes> = (route, data) => {
+const fakeFetch: <T = {} | IData | IProductsRes>(route: TRoute, data?: IFilterResult | IPaymentData) => Promise<IRes<T>> = (route, data) => {
   if (route === routes.pay && !data) {
     throw new Error('Data has to be provided to make a payment');
   }
 
   if (route !== routes.catalog && route !== routes.pay && route !== routes.main) {
-    return new Promise<IRes>((res) => {
+    return new Promise<IRes<{}>>((res) => {
       res({
         status: 400,
         text: 'Request error',
@@ -135,7 +141,7 @@ const fakeFetch: (route: TRoute, data?: IFilterResult | IPaymentData) => Promise
     });
   }
 
-  return new Promise<IRes>((res, rej) => {
+  return new Promise<IRes<any>>((res, rej) => {
     if (route === routes.main) {
       res(handleMainReq());
     } else if (route === routes.catalog) {

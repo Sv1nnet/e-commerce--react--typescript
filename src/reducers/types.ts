@@ -12,17 +12,12 @@ export interface ICart {
   total: number;
 }
 
-type title = string;
-type id = string | number;
-type price = number;
-type discount = number;
-type available = boolean;
-
 export interface IProduct {
-  [key: string]: title | id | price | discount | available;
   title: string;
   id: string;
   price: number;
   discount: number;
   available: boolean;
+  img?: string;
+  description?: string;
 }

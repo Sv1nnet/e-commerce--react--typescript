@@ -9,12 +9,14 @@ import CheckoutRoute from '@components/routes/CheckoutRoute';
 import './style.scss';
 
 
-interface IProps extends TMappedDispatch {}
+interface IProps extends TMappedDispatch {
+  className?: string;
+}
 
 
-const MainSection: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
+const MainSection: React.FC<IProps> = ({ className, addToCart, removeFromCart }) => {
   return (
-    <main className="MainSection">
+    <main className={`MainSection ${className}`}>
       <Switch>
         <Route exact path="/">
           <MainRoute addToCart={addToCart} removeFromCart={removeFromCart} />
