@@ -58,7 +58,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 169,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg.jpg",
+      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -199,7 +199,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 169,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg.jpg",
+      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg",
       "discount": 0,
       "available": true
     }

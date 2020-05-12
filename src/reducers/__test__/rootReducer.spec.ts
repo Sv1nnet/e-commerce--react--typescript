@@ -60,7 +60,9 @@ describe('Test ADD_TO_CART action dispatching', () => {
     store.subscribe(() => {
       const updatedState = store.getState();
       updatedState.cart.products.forEach((el: IProduct, i: number) => {
-        for (const prop in el) {
+        let prop: keyof IProduct = Object.keys(el)[0] as keyof IProduct;
+
+        for (prop in el) {
           expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
         }
       });
@@ -93,7 +95,8 @@ describe('Test ADD_TO_CART action dispatching', () => {
     store.subscribe(() => {
       const updatedState = store.getState();
       updatedState.cart.products.forEach((el: IProduct, i: number) => {
-        for (const prop in el) {
+        let prop: keyof IProduct = Object.keys(el)[0] as keyof IProduct;
+        for (prop in el) {
           expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
         }
       });
