@@ -18,4 +18,18 @@
     color: white;
     background-color: $main-color;
   }
+
+  &:disabled {
+    color: lightgrey;
+    border: 1px solid lightgrey;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  
+    &:active {
+      background-color: transparent;
+    }
+  }
 }
