@@ -1,2 +1,2 @@
 # e-commerce--react--typescript
- Trying to create react e-commerce front-end application with typescript
+ A small e-commerce application that is made in order to learn typescript.
