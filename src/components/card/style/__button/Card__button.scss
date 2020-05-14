@@ -1,0 +1,21 @@
+@import '@style/vars/colors.scss';
+
+.Card__button {
+  align-self: flex-end;
+  width: 100%;
+  box-shadow: none;
+  box-sizing: border-box;
+  border: 1px solid grey;
+  cursor: pointer;
+  transition: .2s all ease;
+
+  &:hover {
+    color: white;
+    background-color: $main-hover-color;
+  }
+
+  &:active {
+    color: white;
+    background-color: $main-color;
+  }
+}

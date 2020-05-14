@@ -13,11 +13,12 @@ export interface ICart {
 }
 
 export interface IProduct {
-  title: string;
+  name: string;
   id: string;
   price: number;
   discount: number;
   available: boolean;
+  type?: string;
   img?: string;
   description?: string;
 }

@@ -30,9 +30,12 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
     <div className="Main">
       {productsToRender.map((prod) => (
         <Card
+          className="Main__card"
           key={prod.id}
           id={prod.id}
+          name={prod.name}
           price={prod.price}
+          type={prod.type}
           discount={prod.discount}
           description={prod.description}
           imgSrc={prod.img}
