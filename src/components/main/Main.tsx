@@ -21,6 +21,8 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
     if (products[name]) products[name].forEach((prod) => productsToRender.push(prod));
   }
 
+  productsToRender.sort((item: IProduct) => (item.available ? -1 : 1));
+
   useEffect(() => {
     fakeFetch<IProductsRes>('/').then((res) => {
       const { data } = res;
@@ -49,6 +51,7 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
           type={prod.type}
           discount={prod.discount}
           description={prod.description}
+          available={prod.available}
           imgSrc={prod.img}
           addToCart={addToCart}
         />
