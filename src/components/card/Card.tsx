@@ -1,9 +1,9 @@
 import React from 'react';
 import { TAddToCart } from '@components/app/App';
 import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
+import { getDiscountMultiplier } from '@/reducers/rootReducer';
 
 import './style.scss';
-import { getDiscountMultiplier } from '@/reducers/rootReducer';
 
 
 interface IProps {
