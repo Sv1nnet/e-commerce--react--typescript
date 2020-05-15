@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TMappedDispatch } from '@components/app/App';
 import Card from '@components/card/Card';
-import fakeFetch, { IRes, IProductsRes } from '@/fakeApi/fakeFetch';
+import fakeFetch, { IProductsRes } from '@/fakeApi/fakeFetch';
 import { IProduct } from '@/reducers/types';
 
 import './style.scss';

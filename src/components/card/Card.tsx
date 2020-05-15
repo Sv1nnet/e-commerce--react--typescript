@@ -5,8 +5,6 @@ import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
 import './style.scss';
 
 
-interface IMappedState { addToCard: TAddToCart; }
-
 interface IProps {
   id: string;
   addToCart: TAddToCart;
