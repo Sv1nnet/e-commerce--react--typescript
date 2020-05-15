@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { TMappedDispatch } from '@components/app/App';
 import Card from '@components/card/Card';
 import fakeFetch, { IProductsRes } from '@/fakeApi/fakeFetch';
 import { IProduct } from '@/reducers/types';
 
 import './style.scss';
+import { FilterContext } from '../contexts/filter/FilterContext';
 
 
 interface IProps extends TMappedDispatch {
@@ -14,9 +15,10 @@ interface IProps extends TMappedDispatch {
 const Main: React.FC<IProps> = ({ addToCart }) => {
   const [products, setProducts] = useState<IProductsRes>({});
   const productsToRender: IProduct[] = [];
+  const { filterData } = useContext(FilterContext);
 
   for (const name in products) {
-    products[name].forEach((prod) => productsToRender.push(prod));
+    if (products[name]) products[name].forEach((prod) => productsToRender.push(prod));
   }
 
   useEffect(() => {
@@ -26,6 +28,15 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
       setProducts(data);
     });
   }, []);
+
+  useEffect(() => {
+    fakeFetch<IProductsRes>('/catalog', filterData).then((res) => {
+      const { data } = res;
+      console.log('res', res);
+      setProducts(data);
+    });
+  }, [filterData]);
+
   return (
     <div className="Main">
       {productsToRender.map((prod) => (

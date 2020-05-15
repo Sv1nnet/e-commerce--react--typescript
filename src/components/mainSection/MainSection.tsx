@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import { TMappedDispatch } from '@components/app/App';
 import MainRoute from '@components/routes/MainRoute';
-import CatalogRoute from '@components/routes/CatalogRoute';
 import CheckoutRoute from '@components/routes/CheckoutRoute';
 
 import './style.scss';
@@ -24,10 +23,6 @@ const MainSection: React.FC<IProps> = ({ className, addToCart, removeFromCart })
 
         <Route path="/checkout">
           <CheckoutRoute addToCart={addToCart} removeFromCart={removeFromCart} />
-        </Route>
-
-        <Route path="/catalog">
-          <CatalogRoute addToCart={addToCart} removeFromCart={removeFromCart} />
         </Route>
       </Switch>
     </main>

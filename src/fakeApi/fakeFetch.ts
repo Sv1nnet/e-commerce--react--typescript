@@ -91,10 +91,10 @@ const handleCatalogReq: (filter: any) => IRes<IFiltered> = (filter = {
     }
 
     // Filter by type
-    if (filter.type.touchscreen || filter.type.buttons) {
+    if ((filter.type.touchscreen || filter.type.buttons) && !(filter.type.touchscreen && filter.type.buttons)) {
       filteredData[brand] = filteredData[brand]?.filter((item: IItem) => {
         for (const type in filter.type) {
-          return item.type === type;
+          if (filter.type[type]) return item.type === type;
         }
         return true;
       });
@@ -111,7 +111,7 @@ const handleCatalogReq: (filter: any) => IRes<IFiltered> = (filter = {
 const handleMainReq: () => IRes<IProductsRes> = () => ({
   status: 200,
   text: 'OK',
-  data: JSON.parse(mainItems),
+  data: JSON.parse(allItems),
 });
 
 const handlePayReq: () => IRes<{}> = () => ({
@@ -120,7 +120,7 @@ const handlePayReq: () => IRes<{}> = () => ({
   data: {},
 });
 
-type TFakeFetch = <T>(route: TRoute, data?: IFilterResult | IPaymentData) => Promise<IRes<T>>;
+
 /**
  * Send simulated requested to a server and get result as Promise<IRes>.
  * @param route '/' or '/catalog' or '/pay'

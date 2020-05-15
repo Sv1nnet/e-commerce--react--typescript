@@ -27,7 +27,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
   const { filterData, updateFilter } = useContext<IContextValue>(FilterContext);
 
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
-  const [filter, setFilter] = useState<IFilterResult>(filterData);
+  const [filter, setFilter] = useState<IFilterResult>(filterData); // Filter to render in Sidebar
   const [showButtonRelatedElementData, setShowButtonRelatedElementData] = useState<IRelatedElement>({ top: 0, height: 0 });
 
   const sideBarRef = useRef<HTMLDivElement>(null);
@@ -69,6 +69,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
         [newFilter.price[1], newFilter.price[0]] = [newFilter.price[0], newFilter.price[1]];
         setFilter(newFilter);
       }
+
       return newFilter;
     });
     setFilterChanged(false);

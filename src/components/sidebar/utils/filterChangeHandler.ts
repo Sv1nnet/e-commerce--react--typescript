@@ -36,7 +36,7 @@ const filterChangeHandler: IFilterChanger = {
     if (target.checked) {
       newFilter.brands.push(target.name);
     } else {
-      newFilter.brands = newFilter.brands.filter((brand) => brand === target.name);
+      newFilter.brands = newFilter.brands.filter((brand) => brand !== target.name);
     }
 
     return newFilter;

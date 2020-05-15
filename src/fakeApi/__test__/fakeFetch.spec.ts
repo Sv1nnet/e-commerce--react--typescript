@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
+import { IProduct } from '@/reducers/types';
 import fakeFetch, { IData } from '../fakeFetch';
 import { mainItems as mainItemsStr, allItems as allItemsStr } from '../stringifiedItems';
 
@@ -178,6 +179,86 @@ describe('Catalog page data loading', () => {
       pricedItems[brand].forEach((item: any, i: number) => {
         expect(item.id).equals(result[brand][i].id);
         expect(result[brand][i].price).greaterThan(+filter.price[0]! - 1);
+      });
+    }
+  });
+
+  it('Should load filtered only items with buttons type for catalog page', async () => {
+    const filter: IFilterResult = {
+      discount: false,
+      price: [0, 0],
+      brands: [],
+      type: {
+        touchscreen: false,
+        buttons: true,
+      },
+    };
+
+    const itemsWithButtons: any = {};
+
+    for (const brand in allItems) {
+      itemsWithButtons[brand] = allItems[brand].filter((item: any) => item.type === 'buttons');
+      if (itemsWithButtons[brand].length < 1) delete itemsWithButtons[brand];
+    }
+
+    const result: IData = (await fakeFetch('/catalog', filter)).data;
+    expect(Object.keys(result).length).greaterThan(0);
+
+    for (const brand in itemsWithButtons) {
+      itemsWithButtons[brand].forEach((item: any, i: number) => {
+        expect(item.id).equals(result[brand][i].id);
+        expect(result[brand][i].type).equals('buttons');
+      });
+    }
+  });
+
+  it('Should load filtered only items with touchscreen type for catalog page', async () => {
+    const filter: IFilterResult = {
+      discount: false,
+      price: [0, 0],
+      brands: [],
+      type: {
+        touchscreen: true,
+        buttons: false,
+      },
+    };
+
+    const itemsWithButtons: any = {};
+
+    for (const brand in allItems) {
+      itemsWithButtons[brand] = allItems[brand].filter((item: any) => item.type === 'touchscreen');
+      if (itemsWithButtons[brand].length < 1) delete itemsWithButtons[brand];
+    }
+
+    const result: IData = (await fakeFetch('/catalog', filter)).data;
+    expect(Object.keys(result).length).greaterThan(0);
+
+    for (const brand in itemsWithButtons) {
+      itemsWithButtons[brand].forEach((item: any, i: number) => {
+        expect(item.id).equals(result[brand][i].id);
+        expect(result[brand][i].type).equals('touchscreen');
+      });
+    }
+  });
+
+  it('Should load filtered only items with touchscreen and buttons type for catalog page', async () => {
+    const filter: IFilterResult = {
+      discount: false,
+      price: [0, 0],
+      brands: [],
+      type: {
+        touchscreen: true,
+        buttons: true,
+      },
+    };
+
+    const result: IData = (await fakeFetch('/catalog', filter)).data;
+    expect(Object.keys(result).length).greaterThan(0);
+
+    for (const brand in allItems) {
+      allItems[brand].forEach((item: any, i: number) => {
+        expect(item.id).equals(result[brand][i].id);
+        expect(result[brand][i].type).oneOf(['touchscreen', 'buttons']);
       });
     }
   });
