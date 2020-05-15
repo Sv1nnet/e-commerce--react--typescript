@@ -3,6 +3,7 @@ import { TAddToCart } from '@components/app/App';
 import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
 
 import './style.scss';
+import { getDiscountMultiplier } from '@/reducers/rootReducer';
 
 
 interface IProps {
@@ -32,7 +33,7 @@ const Card: React.FC<IProps> = (props) => {
     discount,
     available = true,
   } = props;
-  const discountedPrice: number = discount > 0 ? price - Math.round((price / 100) * discount) : 0;
+  const discountedPrice: number = discount > 0 ? Math.round(price * getDiscountMultiplier(discount)) : 0;
 
   const add: React.EventHandler<React.SyntheticEvent<HTMLButtonElement>> = () => {
     addToCart({

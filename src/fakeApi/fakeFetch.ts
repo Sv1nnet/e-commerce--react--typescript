@@ -1,6 +1,7 @@
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
 import { IProduct } from '@/reducers/types';
-import { allItems, mainItems } from './stringifiedItems';
+import { getDiscountMultiplier } from '@/reducers/rootReducer';
+import { allItems } from './stringifiedItems';
 
 
 type TRoute = '/' | '/catalog' | '/pay';
@@ -81,8 +82,9 @@ const handleCatalogReq: (filter: any) => IRes<IFiltered> = (filter = {
     if (!!filter.price[0] || !!filter.price[1]) {
       filteredData[brand] = filteredData[brand]?.filter((item: IItem) => {
         const shouldCheckPriceUpto = !!priceUpto;
-        const priceHeigherThanFrom = item.price >= priceFrom;
-        const priceLowerThanUpto = item.price <= priceUpto;
+        const itemPrice = Math.round(item.price * getDiscountMultiplier(item.discount));
+        const priceHeigherThanFrom = itemPrice >= priceFrom;
+        const priceLowerThanUpto = itemPrice <= priceUpto;
 
         return shouldCheckPriceUpto ? priceLowerThanUpto && priceHeigherThanFrom : priceHeigherThanFrom;
       });
