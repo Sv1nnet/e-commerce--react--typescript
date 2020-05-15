@@ -72,6 +72,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
       return newFilter;
     });
     setFilterChanged(false);
+    hideSideBar();
   };
 
   return (
