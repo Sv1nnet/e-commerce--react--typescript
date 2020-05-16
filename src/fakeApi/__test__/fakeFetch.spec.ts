@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import { expect } from 'chai';
 
 import { IFilterResult } from '@components/contexts/filter/FilterContext';

@@ -5,52 +5,27 @@ import {
   createStore,
   applyMiddleware,
   compose,
-  AnyAction,
 } from 'redux';
 import thunk from 'redux-thunk';
 import { allItems as allItemsStr } from '../../fakeApi/stringifiedItems';
 import { cartTypes } from '../../actions/actionTypes';
-import { TState, IProduct } from '../types';
 import rootReducer, { getDiscountMultiplier } from '../rootReducer';
 
-type TItem = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  type: string;
-  img: string;
-  discount: number;
-  available: boolean;
-};
 
-interface IItems {
-  [key: string]: IProduct[];
-}
-
-const allItems: IItems = JSON.parse(allItemsStr);
-
-
-interface IAddToCartAction extends AnyAction {
-  data: IProduct;
-}
-interface IRemoveFromCartAction extends AnyAction {
-  data: string;
-}
-
+const allItems = JSON.parse(allItemsStr);
 
 describe('Test ADD_TO_CART action dispatching', () => {
   it('Should add product to the cart and update "total" prop', () => {
     const composeEnhancers = compose(applyMiddleware(thunk));
     const store = createStore(rootReducer, composeEnhancers);
-    const samsungGalaxyS20: IProduct = allItems.Samsung[0];
+    const samsungGalaxyS20 = allItems.Samsung[0];
 
-    const action: IAddToCartAction = {
+    const action = {
       type: cartTypes.ADD_TO_CART,
       data: samsungGalaxyS20,
     };
 
-    const stateToCompare: TState = {
+    const stateToCompare = {
       cart: {
         products: [samsungGalaxyS20],
         total: samsungGalaxyS20.price,
@@ -59,8 +34,8 @@ describe('Test ADD_TO_CART action dispatching', () => {
 
     store.subscribe(() => {
       const updatedState = store.getState();
-      updatedState.cart.products.forEach((el: IProduct, i: number) => {
-        let prop: keyof IProduct = Object.keys(el)[0] as keyof IProduct;
+      updatedState.cart.products.forEach((el, i) => {
+        let prop = Object.keys(el)[0];
 
         for (prop in el) {
           expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
@@ -74,16 +49,16 @@ describe('Test ADD_TO_CART action dispatching', () => {
   it('Should add 2 products (1 with discount) to the cart and update "total" prop', () => {
     const composeEnhancers = compose(applyMiddleware(thunk));
     const store = createStore(rootReducer, composeEnhancers);
-    const samsungGalaxyS20: IProduct = allItems.Samsung[0];
-    const xiaomiMiMix2S: IProduct = allItems.Xiaomi[3];
+    const samsungGalaxyS20 = allItems.Samsung[0];
+    const xiaomiMiMix2S = allItems.Xiaomi[3];
 
-    const action: IAddToCartAction = {
+    const action = {
       type: cartTypes.ADD_TO_CART,
       data: samsungGalaxyS20,
     };
-    const total: number = samsungGalaxyS20.price + (xiaomiMiMix2S.price * getDiscountMultiplier(xiaomiMiMix2S.discount));
+    const total = samsungGalaxyS20.price + (xiaomiMiMix2S.price * getDiscountMultiplier(xiaomiMiMix2S.discount));
 
-    const stateToCompare: TState = {
+    const stateToCompare = {
       cart: {
         products: [samsungGalaxyS20, xiaomiMiMix2S],
         total,
@@ -94,8 +69,8 @@ describe('Test ADD_TO_CART action dispatching', () => {
 
     store.subscribe(() => {
       const updatedState = store.getState();
-      updatedState.cart.products.forEach((el: IProduct, i: number) => {
-        let prop: keyof IProduct = Object.keys(el)[0] as keyof IProduct;
+      updatedState.cart.products.forEach((el, i) => {
+        let prop = Object.keys(el)[0];
         for (prop in el) {
           expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
         }
@@ -103,7 +78,7 @@ describe('Test ADD_TO_CART action dispatching', () => {
       expect(updatedState.cart.total).equals(stateToCompare.cart.total);
     });
 
-    const actionWithDiscountedProduct: IAddToCartAction = {
+    const actionWithDiscountedProduct = {
       type: cartTypes.ADD_TO_CART,
       data: allItems.Xiaomi[3],
     };
@@ -115,9 +90,9 @@ describe('Test REMOVE_FROM_CART action dispatching', () => {
   it('Should remove product from the cart and update "total" prop. A cart has to be empty', () => {
     const composeEnhancers = compose(applyMiddleware(thunk));
     const store = createStore(rootReducer, composeEnhancers);
-    const samsungGalaxyS20: IProduct = allItems.Samsung[0];
+    const samsungGalaxyS20 = allItems.Samsung[0];
 
-    const action: IRemoveFromCartAction = {
+    const action = {
       type: cartTypes.REMOVE_FROM_CART,
       data: samsungGalaxyS20.id,
     };
@@ -134,19 +109,19 @@ describe('Test REMOVE_FROM_CART action dispatching', () => {
   it('Should remove product with discount from the cart and update "total" prop', () => {
     const composeEnhancers = compose(applyMiddleware(thunk));
     const store = createStore(rootReducer, composeEnhancers);
-    const samsungGalaxyS20: IProduct = allItems.Samsung[0];
-    const xiaomiMiMix2S: IProduct = allItems.Xiaomi[3];
+    const samsungGalaxyS20 = allItems.Samsung[0];
+    const xiaomiMiMix2S = allItems.Xiaomi[3];
 
-    const actionOne: IAddToCartAction = {
+    const actionOne = {
       type: cartTypes.ADD_TO_CART,
       data: samsungGalaxyS20,
     };
-    const actionTwo: IAddToCartAction = {
+    const actionTwo = {
       type: cartTypes.ADD_TO_CART,
       data: xiaomiMiMix2S,
     };
 
-    const stateToCompare: TState = {
+    const stateToCompare = {
       cart: {
         products: [samsungGalaxyS20],
         total: samsungGalaxyS20.price,
@@ -164,7 +139,7 @@ describe('Test REMOVE_FROM_CART action dispatching', () => {
       expect(updatedState.cart.total).equals(stateToCompare.cart.total);
     });
 
-    const actionWithDiscountedProduct: IRemoveFromCartAction = {
+    const actionWithDiscountedProduct = {
       type: cartTypes.REMOVE_FROM_CART,
       data: xiaomiMiMix2S.id,
     };
