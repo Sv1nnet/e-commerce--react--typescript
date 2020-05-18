@@ -15,7 +15,7 @@ import '@/index.scss';
 
 
 const composeEnhancers = composeWithDevTools(applyMiddleware(thunk));
-const store: Store<TState, Action<TAction>> = createStore(rootReducer, composeEnhancers);
+const store = createStore(rootReducer, composeEnhancers);
 
 ReactDOM.render(
   <BrowserRouter>

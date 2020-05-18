@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 
+import { TProductInCart } from '@/components/cart/Cart';
 import { TState } from '../../../../reducers/types';
 
 import './style.scss';
@@ -11,11 +12,16 @@ import './style.scss';
 interface IProps {
   numberOfItems: number;
   className?: string;
-  onClick?: (e: TButtonEvent, state?: boolean) => void;
+  onClick?: (e: TButtonEvent, state: boolean) => void;
 }
 
 type TButtonEvent = React.SyntheticEvent<HTMLButtonElement>;
 type IMapState = (state: TState) => { numberOfItems: number };
+
+
+const mapStateToProps: IMapState = (state) => ({
+  numberOfItems: state.cart.products.map((item: TProductInCart): number => item.number).reduce((prev, cur) => prev + cur, 0),
+});
 
 
 const BasketButton: React.FC<IProps> = ({ className, numberOfItems, onClick }) => {
@@ -37,9 +43,5 @@ const BasketButton: React.FC<IProps> = ({ className, numberOfItems, onClick }) =
     </button>
   );
 };
-
-const mapStateToProps: IMapState = (state) => ({
-  numberOfItems: state.cart.products.length,
-});
 
 export default connect(mapStateToProps)(BasketButton);

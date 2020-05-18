@@ -2,27 +2,26 @@ import React from 'react';
 import { Dispatch, Action } from 'redux';
 import { Switch, Route } from 'react-router-dom';
 
+import { TMappedDispatch } from '@components/app/App';
 import { IAddToCartAction, IRemoveFromCartAction } from '@/actions/cartActions';
-import BasketPage from '../pages/BasketPage';
-import Basket from '../basket/Basket';
+import CartPage from '../pages/CartPage';
+import Cart from '../cart/Cart';
 
 
-interface IProps {
-  addToCart: Dispatch<Action<IAddToCartAction>>;
-  removeFromCart: Dispatch<Action<IRemoveFromCartAction>>;
+interface IProps extends TMappedDispatch {
   children?: React.ReactNode;
 }
 
 
 const BasketRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
   return (
-    <BasketPage>
+    <CartPage>
       <Switch>
         <Route exact path="/basket">
-          <Basket />
+          <Cart />
         </Route>
       </Switch>
-    </BasketPage>
+    </CartPage>
   );
 };
 

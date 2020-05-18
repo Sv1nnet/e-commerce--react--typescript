@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { TState, IProduct } from '@/reducers/types';
+import { TState, TProductInCart } from '@/reducers/types';
 
 import Navigation from '@components/navigation/Navigation';
 import MainSection from '@components/mainSection/MainSection';
 import SideBar from '@components/sidebar/SideBar';
 import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
 
-import { addToCart as addToCartAction, removeFromCart as removeFromCartAction, IAddToCartAction, IRemoveFromCartAction } from '@/actions/cartActions';
+import { addToCart as addToCartAction, removeFromCart as removeFromCartAction, IAddToCartAction, IRemoveFromCartAction, IChangeProductNumberAction } from '@/actions/cartActions';
 import FilterContextProvider from '../contexts/filter/FilterContext';
 import './style.scss';
 
 
 const mapDispatchToProps: TMapDispatchToProps = (dispatch) => ({
-  addToCart: (id) => dispatch(addToCartAction(id)),
+  addToCart: (item) => dispatch(addToCartAction(item)),
   removeFromCart: (id) => dispatch(removeFromCartAction(id)),
 });
 
 
 export type TMappedDispatch = {
-  addToCart: TAddToCart;
-  removeFromCart: TRemoveFromCart;
+  addToCart: TAddToCart,
+  removeFromCart: TRemoveFromCart,
+  changeProductNumber?: TChangeProductNumber,
 };
 
-type TMapDispatchToProps = (dispatch: ThunkDispatch<TState, undefined, IAddToCartAction | IRemoveFromCartAction>) => TMappedDispatch;
-export type TAddToCart = (product: IProduct) => void;
+export type TMapDispatchToProps = (dispatch: ThunkDispatch<TState, undefined, IAddToCartAction | IRemoveFromCartAction | IChangeProductNumberAction>) => TMappedDispatch;
+export type TAddToCart = (item: TProductInCart) => void;
 export type TRemoveFromCart = (id: string) => void;
+export type TChangeProductNumber = (item: TProductInCart) => void;
 
-type IProps = ReturnType<typeof mapDispatchToProps> & {};
+interface IProps extends ReturnType<typeof mapDispatchToProps> {}
 
 
 const App: React.FC<IProps> = ({ addToCart, removeFromCart }) => {

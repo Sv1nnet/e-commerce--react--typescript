@@ -1,5 +1,6 @@
 import 'module-alias/register';
 import { expect } from 'chai';
+import { it, describe } from 'mocha';
 
 import {
   createStore,
@@ -20,15 +21,23 @@ describe('Test ADD_TO_CART action dispatching', () => {
     const store = createStore(rootReducer, composeEnhancers);
     const samsungGalaxyS20 = allItems.Samsung[0];
 
+    const productToAddS = {
+      id: samsungGalaxyS20.id,
+      name: samsungGalaxyS20.name,
+      price: samsungGalaxyS20.price,
+      discount: samsungGalaxyS20.discount,
+      number: 1,
+    };
+
     const action = {
       type: cartTypes.ADD_TO_CART,
-      data: samsungGalaxyS20,
+      data: productToAddS,
     };
 
     const stateToCompare = {
       cart: {
-        products: [samsungGalaxyS20],
-        total: samsungGalaxyS20.price,
+        products: [productToAddS],
+        total: productToAddS.price,
       },
     };
 
@@ -52,15 +61,30 @@ describe('Test ADD_TO_CART action dispatching', () => {
     const samsungGalaxyS20 = allItems.Samsung[0];
     const xiaomiMiMix2S = allItems.Xiaomi[3];
 
+    const productToAddS = {
+      id: samsungGalaxyS20.id,
+      name: samsungGalaxyS20.name,
+      price: samsungGalaxyS20.price,
+      discount: samsungGalaxyS20.discount,
+      number: 1,
+    };
+    const productToAddX = {
+      id: xiaomiMiMix2S.id,
+      name: xiaomiMiMix2S.name,
+      price: xiaomiMiMix2S.price,
+      discount: xiaomiMiMix2S.discount,
+      number: 1,
+    };
+
     const action = {
       type: cartTypes.ADD_TO_CART,
-      data: samsungGalaxyS20,
+      data: productToAddS,
     };
-    const total = samsungGalaxyS20.price + (xiaomiMiMix2S.price * getDiscountMultiplier(xiaomiMiMix2S.discount));
+    const total = productToAddS.price + Math.round((productToAddX.price * getDiscountMultiplier(productToAddX.discount)));
 
     const stateToCompare = {
       cart: {
-        products: [samsungGalaxyS20, xiaomiMiMix2S],
+        products: [productToAddS, productToAddX],
         total,
       },
     };
@@ -80,7 +104,7 @@ describe('Test ADD_TO_CART action dispatching', () => {
 
     const actionWithDiscountedProduct = {
       type: cartTypes.ADD_TO_CART,
-      data: allItems.Xiaomi[3],
+      data: productToAddX,
     };
     store.dispatch(actionWithDiscountedProduct);
   });
@@ -112,19 +136,34 @@ describe('Test REMOVE_FROM_CART action dispatching', () => {
     const samsungGalaxyS20 = allItems.Samsung[0];
     const xiaomiMiMix2S = allItems.Xiaomi[3];
 
+    const productToAddS = {
+      id: samsungGalaxyS20.id,
+      name: samsungGalaxyS20.name,
+      price: samsungGalaxyS20.price,
+      discount: samsungGalaxyS20.discount,
+      number: 1,
+    };
+    const productToAddX = {
+      id: xiaomiMiMix2S.id,
+      name: xiaomiMiMix2S.name,
+      price: xiaomiMiMix2S.price,
+      discount: xiaomiMiMix2S.discount,
+      number: 1,
+    };
+
     const actionOne = {
       type: cartTypes.ADD_TO_CART,
-      data: samsungGalaxyS20,
+      data: productToAddS,
     };
     const actionTwo = {
       type: cartTypes.ADD_TO_CART,
-      data: xiaomiMiMix2S,
+      data: productToAddX,
     };
 
     const stateToCompare = {
       cart: {
-        products: [samsungGalaxyS20],
-        total: samsungGalaxyS20.price,
+        products: [productToAddS],
+        total: productToAddS.price,
       },
     };
 
@@ -135,14 +174,116 @@ describe('Test REMOVE_FROM_CART action dispatching', () => {
       const updatedState = store.getState();
 
       expect(updatedState.cart.products.length).equals(1);
-      expect(updatedState.cart.products[0].id).equals(samsungGalaxyS20.id);
+      expect(updatedState.cart.products[0].id).equals(productToAddS.id);
       expect(updatedState.cart.total).equals(stateToCompare.cart.total);
     });
 
     const actionWithDiscountedProduct = {
       type: cartTypes.REMOVE_FROM_CART,
-      data: xiaomiMiMix2S.id,
+      data: productToAddX.id,
     };
     store.dispatch(actionWithDiscountedProduct);
+  });
+});
+
+describe('Test CHANGE_PRODUCT_NUMBER', () => {
+  it('Should update product number and update "total" prop', () => {
+    const composeEnhancers = compose(applyMiddleware(thunk));
+    const store = createStore(rootReducer, composeEnhancers);
+    const samsungGalaxyS20 = allItems.Samsung[0];
+
+    const productToAddS = {
+      id: samsungGalaxyS20.id,
+      name: samsungGalaxyS20.name,
+      price: samsungGalaxyS20.price,
+      discount: samsungGalaxyS20.discount,
+      number: 1,
+    };
+
+    const firstAction = {
+      type: cartTypes.ADD_TO_CART,
+      data: productToAddS,
+    };
+    const secondAction = {
+      type: cartTypes.CHANGE_PRODUCT_NUMBER,
+      data: {
+        ...productToAddS,
+        number: 5,
+      },
+    };
+
+    const stateToCompare = {
+      cart: {
+        products: [{ ...productToAddS, number: 5 }],
+        total: (productToAddS.price * 5),
+      },
+    };
+
+    store.dispatch(firstAction);
+
+    store.subscribe(() => {
+      const updatedState = store.getState();
+      updatedState.cart.products.forEach((el, i) => {
+        for (const prop in el) {
+          expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
+        }
+      });
+      expect(updatedState.cart.total).equals(stateToCompare.cart.total);
+    });
+    store.dispatch(secondAction);
+  });
+
+  it('Should remove product from a cart if it\'s number less than 0 and it has 0 items in the cart. And update "total" prop', () => {
+    const composeEnhancers = compose(applyMiddleware(thunk));
+    const store = createStore(rootReducer, composeEnhancers);
+    const samsungGalaxyS20 = allItems.Samsung[0];
+
+    const productToAddS = {
+      id: samsungGalaxyS20.id,
+      name: samsungGalaxyS20.name,
+      price: samsungGalaxyS20.price,
+      discount: samsungGalaxyS20.discount,
+      number: 1,
+    };
+
+    const firstAction = {
+      type: cartTypes.ADD_TO_CART,
+      data: productToAddS,
+    };
+    const secondAction = {
+      type: cartTypes.CHANGE_PRODUCT_NUMBER,
+      data: {
+        ...productToAddS,
+        number: 0,
+      },
+    };
+    const finalAction = {
+      type: cartTypes.CHANGE_PRODUCT_NUMBER,
+      data: {
+        ...productToAddS,
+        number: -1,
+      },
+    };
+
+    const stateToCompare = {
+      cart: {
+        products: [],
+        total: 0,
+      },
+    };
+
+    store.dispatch(firstAction);
+    store.dispatch(secondAction);
+
+    store.subscribe(() => {
+      const updatedState = store.getState();
+      updatedState.cart.products.forEach((el, i) => {
+        for (const prop in el) {
+          expect(el[prop]).equals(stateToCompare.cart.products[i][prop]);
+        }
+      });
+      expect(updatedState.cart.total).equals(stateToCompare.cart.total);
+    });
+    store.dispatch(finalAction);
   });
 });

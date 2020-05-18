@@ -4,13 +4,14 @@ import React from 'react';
 import './style.scss';
 
 
-type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
-type ChangeHandler = (e: InputChangeEvent) => void;
+export type TInputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+export type TInputFocusEvent = React.FocusEventHandler<HTMLInputElement>;
+export type TChangeHandler = (e: TInputChangeEvent) => void;
 
 interface IProps {
   value: string | string[] | number | undefined;
-  onChange: ChangeHandler;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  onChange: TChangeHandler;
+  onBlur?: TInputFocusEvent;
   data?: {
     [key: string]: string,
   },

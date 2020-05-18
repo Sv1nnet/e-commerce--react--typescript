@@ -41,9 +41,7 @@ const Card: React.FC<IProps> = (props) => {
       id,
       price,
       discount,
-      available,
-      type,
-      img: imgSrc,
+      number: 1,
     });
   };
 
