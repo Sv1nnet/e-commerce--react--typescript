@@ -79,7 +79,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
   return (
     <>
       <aside>
-        <div ref={sideBarRef} className={`SideBar ${className || ''} App__sidebar`}>
+        <div ref={sideBarRef} className={`SideBar SideBar_s ${className || ''}`}>
           <div className="SideBar__inner">
 
             <CloseButton className="SideBar__close-button" onClick={hideSideBar} />

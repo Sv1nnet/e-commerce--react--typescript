@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { TMappedDispatch } from '@components/app/App';
-import MainRoute from '@components/routes/MainRoute';
+import MainRoute from '@/components/routes/MainRoute';
 import CheckoutRoute from '@components/routes/CheckoutRoute';
 
 import './style.scss';
