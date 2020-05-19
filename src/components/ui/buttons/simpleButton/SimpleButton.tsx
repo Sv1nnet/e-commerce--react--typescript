@@ -25,8 +25,10 @@ const SimpleButton: React.FC<IProps> = (props) => {
 
   return (
     <button type="button" onClick={onClick} className={`SimpleButton ${className || ''}`} disabled={disabled}>
-      <span className={`SimpleButton__text ${textClassName || ''}`}>{text}</span>
-      {children}
+      <span className={`SimpleButton__text ${textClassName || ''}`}>
+        {text}
+        {children}
+      </span>
     </button>
   );
 };

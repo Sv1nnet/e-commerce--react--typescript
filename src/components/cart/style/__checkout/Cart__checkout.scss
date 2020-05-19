@@ -1,0 +1,14 @@
+@import '@style/vars/colors.scss';
+
+.Cart__checkout {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+
+  text-decoration: none;
+  text-align: center;
+  line-height: 2.5em;
+  color: white;
+  border-radius: 4px;
+  background-color: $main-color;
+}

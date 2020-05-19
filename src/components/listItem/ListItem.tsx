@@ -10,7 +10,7 @@ interface IProps {
 const ListItem: React.FC<IProps> = ({ children, className }) => {
 
   return (
-    <li className={`ListItem ${className}`}>
+    <li className={`ListItem ${className || ''}`}>
       {children}
     </li>
   );

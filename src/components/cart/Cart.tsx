@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
-import { addToCart as addToCartAction, removeFromCart as removeFromCartAction, changeProductNumber as changeProductNumberAction, IRemoveFromCartAction, IChangeProductNumberAction } from '@/actions/cartActions';
+import { removeFromCart as removeFromCartAction, changeProductNumber as changeProductNumberAction, IRemoveFromCartAction, IChangeProductNumberAction } from '@/actions/cartActions';
 import { TRemoveFromCart, TChangeProductNumber } from '@components/app/App';
 import { TState, ICart } from '@/reducers/types';
 import ListItem from '../listItem/ListItem';
@@ -40,29 +40,6 @@ interface IProps extends ReturnType<typeof mapDispatchToProps> {
 }
 
 
-const getProductListCallback = (cart: ICart) => (): TProductInCart[] => {
-  const itemsInCart: IItemsInCart = {};
-  const newState: TProductInCart[] = [];
-
-  cart.products.forEach((prod) => {
-    const { id } = prod;
-    if (itemsInCart[id]) itemsInCart[id].number += 1;
-    else itemsInCart[id] = { id, name: prod.name, number: 1 };
-  });
-
-  let prod: keyof IItemsInCart = 'id';
-  for (prod in itemsInCart) {
-    newState.push({
-      id: itemsInCart[prod].id,
-      name: itemsInCart[prod].name,
-      number: itemsInCart[prod].number,
-    });
-  }
-
-  return newState;
-};
-
-
 const Cart: React.FC<IProps> = ({ className = '', cart, removeFromCart, changeProductNumber }) => {
   const { products, total } = cart;
   const setNumber: TSetNumber = (id, number) => {
@@ -71,11 +48,11 @@ const Cart: React.FC<IProps> = ({ className = '', cart, removeFromCart, changePr
   };
 
   return (
-    <div className={`Cart ${className}`}>
+    <ul className={`Cart ${className}`}>
       {
         products.length <= 0
           ? (
-            <ListItem>
+            <ListItem className="Cart__list-item-empty">
               <span className="Cart__empty">Cart empty</span>
             </ListItem>
           )
@@ -85,12 +62,21 @@ const Cart: React.FC<IProps> = ({ className = '', cart, removeFromCart, changePr
                 removeFromCart={removeFromCart}
                 updateNumber={setNumber}
                 prod={prod}
+                className="Cart__item-in-cart"
               />
             </ListItem>
           ))
       }
-      {products.length > 0 && <Link className="Cart__checkout" to="/checkout">Checkout</Link>}
-    </div>
+
+      {products.length > 0 && (
+        <>
+          <p className="Cart__total">
+            Total: <span className="Cart__total-sum">${total}</span>
+          </p>
+          <Link className="Cart__checkout" to="/checkout">Checkout</Link>
+        </>
+      )}
+    </ul>
   );
 };
 

@@ -29,7 +29,7 @@ const Navigation: React.FC<IProps> = ({ className }) => {
         </div>
 
         {
-          !isBasketOpened && <Cart className="Navigation__cart" />
+          isBasketOpened && <Cart className="Navigation__cart" />
         }
 
       </div>

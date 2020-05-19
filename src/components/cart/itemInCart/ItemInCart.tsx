@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { TProductInCart } from '@components/cart/Cart';
 import { TRemoveFromCart } from '@components/app/App';
-import TextInput, { TChangeHandler, TInputFocusEvent } from '@/components/ui/inputs/text/TextInput';
+import TextInput, { TChangeHandler } from '@/components/ui/inputs/text/TextInput';
 import SimpleButton from '@/components/ui/buttons/simpleButton/SimpleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import './style.scss';
 
 
 export type TSetNumber = (id: string, n: number) => void;
@@ -12,6 +14,7 @@ interface IProps {
   removeFromCart: TRemoveFromCart;
   updateNumber: TSetNumber;
   prod: TProductInCart;
+  className?: string;
 }
 
 
@@ -31,18 +34,11 @@ export const getValidatedInputValue = (target: EventTarget & HTMLInputElement): 
 };
 
 
-const ItemInCart: React.FC<IProps> = ({ removeFromCart, updateNumber, prod }) => {
+const ItemInCart: React.FC<IProps> = ({ removeFromCart, updateNumber, prod, className }) => {
   const { id, number } = prod;
   const [value, setValue] = useState<number>(number);
 
   const onChange: TChangeHandler = (e) => {
-    const { target } = e;
-    const newValue: number = getValidatedInputValue(target);
-
-    setValue(newValue);
-  };
-
-  const onBlur: TInputFocusEvent = (e) => {
     const { target } = e;
     const newValue: number = getValidatedInputValue(target);
 
@@ -58,19 +54,21 @@ const ItemInCart: React.FC<IProps> = ({ removeFromCart, updateNumber, prod }) =>
   }, [prod.number]);
 
   return (
-    <>
-      <span className="Cart__item-title">{prod.name}</span>
+    <div className={`ItemInCart ${className || ''}`}>
+      <span className="ItemInCart__title">{prod.name}</span>
 
-      <div className="Cart__number-control-container">
+      <div className="ItemInCart__number-control-container">
 
-        <SimpleButton className="Cart__number-control_add" onClick={() => { setValue((prevValue) => (prevValue + 1)); }}>+</SimpleButton>
-        <TextInput value={prod.number} onChange={onChange} onBlur={onBlur} />
-        <SimpleButton className="Cart__number-control_remove" onClick={() => { setValue((prevValue) => (prevValue - 1)); }}>-</SimpleButton>
-        <SimpleButton className="Cart__number-control_remove-totally" onClick={() => { removeFromCart(id); }}>
-          <FontAwesomeIcon icon={faPlus} />
+        <SimpleButton textClassName="ItemInCart__button-text" className="ItemInCart__number-control" onClick={() => { setValue((prevValue) => (prevValue + 1)); }}>+</SimpleButton>
+        <TextInput className="ItemInCart__text-input" value={prod.number} onChange={onChange} />
+        <SimpleButton textClassName="ItemInCart__button-text" className="ItemInCart__number-control" onClick={() => { setValue((prevValue) => (prevValue - 1)); }}>-</SimpleButton>
+
+        <SimpleButton textClassName="ItemInCart__button-text" className="ItemInCart__number-control ItemInCart__number-control_remove-whole-item" onClick={() => { removeFromCart(id); }}>
+          <FontAwesomeIcon className="ItemInCart__remove-whole-item-icon" icon={faPlus} />
         </SimpleButton>
+
       </div>
-    </>
+    </div>
   );
 };
 
