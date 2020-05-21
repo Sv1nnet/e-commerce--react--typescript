@@ -8,9 +8,9 @@ export type TInputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 export type TInputFocusEvent = React.FocusEventHandler<HTMLInputElement>;
 export type TChangeHandler = (e: TInputChangeEvent) => void;
 
-interface IProps {
-  value: string | string[] | number | undefined;
-  onChange: TChangeHandler;
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  value?: string | string[] | number | undefined;
+  onChange?: TChangeHandler;
   onBlur?: TInputFocusEvent;
   data?: {
     [key: string]: string,
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 
-const TextInput: React.FC<IProps> = (props) => {
+const TextInput: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (props, ref) => {
   const {
     value,
     onChange,
@@ -30,6 +30,7 @@ const TextInput: React.FC<IProps> = (props) => {
     data = {},
     className,
     id,
+    name,
     placeholder,
     defaultValue,
   } = props;
@@ -37,9 +38,10 @@ const TextInput: React.FC<IProps> = (props) => {
   return (
     <input
       type="text"
-      name=""
+      name={name}
       id={id}
       className={`TextInput ${className || ''}`}
+      ref={ref}
       {...data}
       value={value}
       onChange={onChange}
@@ -50,4 +52,4 @@ const TextInput: React.FC<IProps> = (props) => {
   );
 };
 
-export default TextInput;
+export default React.forwardRef<HTMLInputElement, IProps>(TextInput);
