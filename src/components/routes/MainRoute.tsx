@@ -18,7 +18,7 @@ const MainRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
   return (
     <MainPage>
       <SimpleButton
-        text="Filter"
+        value="Filter"
         className="MainPage__filter-button"
         onClick={() => { setSideBarActiveOnMediumScreen((prevState) => !prevState); }}
       />

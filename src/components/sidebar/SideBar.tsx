@@ -177,7 +177,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
             <SimpleButton
               className="SideBar__apply-button SideBar__apply-button_md_active"
               textClassName="SideBar__apply-button-text"
-              text="Apply"
+              value="Apply"
               onClick={submitFilterChange}
             />
 

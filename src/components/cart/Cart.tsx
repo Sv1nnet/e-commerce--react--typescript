@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { removeFromCart as removeFromCartAction, changeProductNumber as changeProductNumberAction, IRemoveFromCartAction, IChangeProductNumberAction } from '@/actions/cartActions';
 import { TRemoveFromCart, TChangeProductNumber } from '@components/app/App';
@@ -37,10 +36,11 @@ export type TProductInCart = {
 interface IProps extends ReturnType<typeof mapDispatchToProps> {
   cart: ICart;
   className?: string;
+  children?: React.ReactNode;
 }
 
 
-const Cart: React.FC<IProps> = ({ className = '', cart, removeFromCart, changeProductNumber }) => {
+const Cart: React.FC<IProps> = ({ className = '', children, cart, removeFromCart, changeProductNumber }) => {
   const { products, total } = cart;
   const setNumber: TSetNumber = (id, number) => {
     const prodToDispatch = cart.products.find((item) => item.id === id);
@@ -67,15 +67,14 @@ const Cart: React.FC<IProps> = ({ className = '', cart, removeFromCart, changePr
             </ListItem>
           ))
       }
-
-      {products.length > 0 && (
-        <>
+      {
+        products.length > 0 && (
           <p className="Cart__total">
             Total: <span className="Cart__total-sum">${total}</span>
           </p>
-          <Link className="Cart__checkout" to="/checkout">Checkout</Link>
-        </>
-      )}
+        )
+      }
+      {children}
     </ul>
   );
 };
