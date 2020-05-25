@@ -1,24 +1,25 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { TMappedDispatch } from '@components/app/App';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import CheckoutPage from '../pages/CheckoutPage';
 import Checkout from '../checkout/Checkout';
 
 
-interface IProps extends TMappedDispatch {
+interface IProps {
   children?: React.ReactNode;
 }
 
-const CheckoutRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
-  return (
-    <CheckoutPage>
-      <Switch>
-        <Route exact path="/checkout">
-          <Checkout />
-        </Route>
-      </Switch>
-    </CheckoutPage>
-  );
-};
+const CheckoutRoute: React.FC<IProps> = () => (
+  <CheckoutPage>
+    <Switch>
+      <Route exact path="/checkout">
+        <Checkout />
+      </Route>
+
+      <Route path="/checkout/:any">
+        <Redirect to="/checkout" />
+      </Route>
+    </Switch>
+  </CheckoutPage>
+);
 
 export default CheckoutRoute;
