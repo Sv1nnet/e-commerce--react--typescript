@@ -32,6 +32,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
 
   const sideBarRef = useRef<HTMLDivElement>(null);
 
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     const inputContainer = document.querySelector<HTMLElement>(`label[for=${target.id}]`) || target;
@@ -91,6 +92,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Discount"
                 name="discount"
                 id="discount"
+                defaultChecked={filter.discount}
                 onChange={onChange}
               />
             </div>
@@ -127,6 +129,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Apple"
                 name="Apple"
                 id="apple"
+                defaultChecked={filter.brands.includes('Apple')}
                 onChange={onChange}
               />
               <Checkbox
@@ -135,6 +138,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="FinePower"
                 name="FinePower"
                 id="finepower"
+                defaultChecked={filter.brands.includes('FinePower')}
                 onChange={onChange}
               />
               <Checkbox
@@ -143,6 +147,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Samsung"
                 name="Samsung"
                 id="samsung"
+                defaultChecked={filter.brands.includes('Samsung')}
                 onChange={onChange}
               />
               <Checkbox
@@ -151,6 +156,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Xiaomi"
                 name="Xiaomi"
                 id="xiaomi"
+                defaultChecked={filter.brands.includes('Xiaomi')}
                 onChange={onChange}
               />
             </Rollup>
@@ -162,6 +168,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Buttons"
                 name="buttons"
                 id="buttons"
+                defaultChecked={filter.type.buttons}
                 onChange={onChange}
               />
               <Checkbox
@@ -170,6 +177,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Touch screen"
                 name="touchscreen"
                 id="touchscreen"
+                defaultChecked={filter.type.touchscreen}
                 onChange={onChange}
               />
             </Rollup>
