@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '@components/ui/logo/Logo';
@@ -24,11 +24,25 @@ interface IProps extends ReturnType<typeof mapStateToProps> {
 
 const Navigation: React.FC<IProps> = ({ className, cart }) => {
   const { products } = cart;
-  const [isBasketOpened, setBasketOpened] = useState<boolean>(false);
+  const [isCartOpened, setBasketOpened] = useState<boolean>(false);
 
   const onBasketClick = (e: React.SyntheticEvent<HTMLButtonElement>, state: boolean): void => {
     setBasketOpened(state);
   };
+
+  const hideCart = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target && (!target.closest('.Navigation__cart') || target.classList.contains('Navigation__checkout-button'))) setBasketOpened(false);
+  }, []);
+
+  // Hide cart if the target of a click event is Checkout button or is not a cart
+  useEffect(() => {
+    if (isCartOpened) {
+      window.addEventListener<'click'>('click', hideCart);
+    }
+
+    return () => window.removeEventListener<'click'>('click', hideCart);
+  }, [isCartOpened]);
 
   return (
     <nav className={`Navigation ${className || ''}`}>
@@ -37,11 +51,11 @@ const Navigation: React.FC<IProps> = ({ className, cart }) => {
         <Logo />
 
         <div className="Navigation__button-container">
-          <BasketButton onClick={onBasketClick} />
+          <BasketButton isActive={isCartOpened} onClick={onBasketClick} />
         </div>
 
         {
-          isBasketOpened && (
+          isCartOpened && (
             <Cart className="Navigation__cart">
               {products.length > 0 && (
                 <Link className="Navigation__checkout-button" to="/checkout">Checkout</Link>

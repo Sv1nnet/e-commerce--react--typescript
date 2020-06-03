@@ -9,12 +9,10 @@ interface IProps {
 }
 
 
-const Spinner: React.FC<IProps> = ({ className, spinnerClassName }) => {
-  return (
-    <div className={`Spinner ${className || ''}`}>
-      <div className={`Spinner__loader ${spinnerClassName || ''}`} />
-    </div>
-  );
-};
+const Spinner: React.FC<IProps> = ({ className, spinnerClassName }) => (
+  <div className={`Spinner ${className || ''}`}>
+    <div className={`Spinner__loader ${spinnerClassName || ''}`} />
+  </div>
+);
 
 export default Spinner;

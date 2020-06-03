@@ -10,6 +10,7 @@ import './style.scss';
 
 
 interface IProps {
+  isActive: boolean;
   numberOfItems: number;
   className?: string;
   onClick?: (e: TButtonEvent, state: boolean) => void;
@@ -24,11 +25,11 @@ const mapStateToProps: IMapState = (state) => ({
 });
 
 
-const BasketButton: React.FC<IProps> = ({ className, numberOfItems, onClick }) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
+const BasketButton: React.FC<IProps> = ({ className, numberOfItems, onClick, isActive }) => {
+  // const [isActive, setIsActive] = useState<boolean>(false);
 
   const buttonAction: React.EventHandler<TButtonEvent> = (e: TButtonEvent) => {
-    setIsActive(!isActive);
+    // setIsActive(!isActive);
     if (onClick) onClick(e, !isActive);
   };
 

@@ -59,12 +59,9 @@ export const makePayment: TMakePayment = (paymentData) => (dispatch, getState) =
   if (products.length <= 0) return Promise.reject(new Error('Cart is empty'));
 
   return fakeFetch('/pay', paymentData)
-    .then((res: IRes<IData>) => {
-      // Simulate internet latency for 1.5s
-      return new Promise<IRes<IData>>((resolve) => {
-        dispatch({ type: paymentTypes.MAKE_PAYMENT, data: res.data });
-        resolve(res);
-      });
-    })
+    .then((res: IRes<IData>) => new Promise<IRes<IData>>((resolve) => {
+      dispatch({ type: paymentTypes.MAKE_PAYMENT, data: res.data });
+      resolve(res);
+    }))
     .catch((err) => err);
 };
