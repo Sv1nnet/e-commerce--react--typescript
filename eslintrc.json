@@ -28,6 +28,11 @@
       "ObjectPattern": { "multiline": true },
       "ImportDeclaration": { "multiline": true, "minProperties": 5 },
       "ExportDeclaration": { "multiline": true, "minProperties": 6 }
-  }]
+    }],
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "labelAttributes": ["label"],
+      "controlComponents": ["TextInput"],
+      "depth": 3
+    }]
   }
 }

@@ -64,7 +64,7 @@ const Card: React.FC<IProps> = (props) => {
         }
 
         <div className="Card__button-container">
-          <SimpleButton className="Card__button" text={available ? 'Add' : 'Sold'} onClick={add} disabled={!available} />
+          <SimpleButton className="Card__button" value={available ? 'Add' : 'Sold'} onClick={add} disabled={!available} />
         </div>
       </div>
     </div>

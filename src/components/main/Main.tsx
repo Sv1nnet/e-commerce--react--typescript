@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TMappedDispatch } from '@components/app/App';
+import { IProduct } from '@/reducers/types';
 import Card from '@components/card/Card';
 import fakeFetch, { IProductsRes } from '@/fakeApi/fakeFetch';
-import { IProduct } from '@/reducers/types';
+import Spinner from '../ui/loaders/Spinner/Spinner';
+import { FilterContext } from '../contexts/filter/FilterContext';
 
 import './style.scss';
-import { FilterContext } from '../contexts/filter/FilterContext';
 
 
 interface IProps extends TMappedDispatch {
@@ -14,8 +15,29 @@ interface IProps extends TMappedDispatch {
 
 const Main: React.FC<IProps> = ({ addToCart }) => {
   const [products, setProducts] = useState<IProductsRes>({});
+  const [loading, setLoading] = useState<boolean>(false);
   const productsToRender: IProduct[] = [];
   const { filterData } = useContext(FilterContext);
+
+
+  useEffect(() => {
+    setLoading(true);
+    fakeFetch<IProductsRes>('/').then((res) => {
+      const { data } = res;
+      setProducts(data);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    fakeFetch<IProductsRes>('/catalog', filterData).then((res) => {
+      const { data } = res;
+      setProducts(data);
+      setLoading(false);
+    });
+  }, [filterData]);
+
 
   for (const name in products) {
     if (products[name]) products[name].forEach((prod) => productsToRender.push(prod));
@@ -23,39 +45,25 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
 
   productsToRender.sort((item: IProduct) => (item.available ? -1 : 1));
 
-  useEffect(() => {
-    fakeFetch<IProductsRes>('/').then((res) => {
-      const { data } = res;
-      console.log('res', res);
-      setProducts(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    fakeFetch<IProductsRes>('/catalog', filterData).then((res) => {
-      const { data } = res;
-      console.log('res', res);
-      setProducts(data);
-    });
-  }, [filterData]);
-
   return (
     <div className="Main">
-      {productsToRender.map((prod) => (
-        <Card
-          className="Main__card"
-          key={prod.id}
-          id={prod.id}
-          name={prod.name}
-          price={prod.price}
-          type={prod.type}
-          discount={prod.discount}
-          description={prod.description}
-          available={prod.available}
-          imgSrc={prod.img}
-          addToCart={addToCart}
-        />
-      ))}
+      {loading
+        ? <Spinner className="Main__spinner-container" spinnerClassName="Main__spinner" />
+        : productsToRender.map((prod) => (
+          <Card
+            className="Main__card"
+            key={prod.id}
+            id={prod.id}
+            name={prod.name}
+            price={prod.price}
+            type={prod.type}
+            discount={prod.discount}
+            description={prod.description}
+            available={prod.available}
+            imgSrc={prod.img}
+            addToCart={addToCart}
+          />
+        ))}
     </div>
   );
 };

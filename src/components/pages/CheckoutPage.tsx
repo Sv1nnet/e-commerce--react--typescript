@@ -9,7 +9,6 @@ const CheckoutPage: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <h2>Checkout Page</h2>
       {children}
     </>
   );

@@ -276,7 +276,36 @@ describe('Sending payment request', () => {
   });
 
   it('Should get payment object', async () => {
-    const result: IData = (await fakeFetch('/pay', { address: 'Some street 24-10', phone: '213123123', itemIds: ['someid1', 'someid2'] }));
+    const result: IData = (await fakeFetch('/pay', {
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      phone: '981237898',
+      email: 'some@mail.com',
+      address: 'Some street 12-3',
+      cardOwner: 'ASD FDSA',
+      cardNumber: '1233 4321 1234 2134',
+      expiration: {
+        month: '12',
+        year: '12',
+      },
+      cvv: '123',
+      items: [
+        {
+          id: 'someidishere',
+          name: 'Samsung g20',
+          price: 100,
+          discount: 0,
+          number: 2,
+        },
+        {
+          id: 'hereissomeid',
+          name: 'iPhone XR',
+          price: 0,
+          discount: 15,
+          number: 4,
+        },
+      ],
+    }));
 
     expect(result.status).equals(200);
     expect(result.text).equals('OK');

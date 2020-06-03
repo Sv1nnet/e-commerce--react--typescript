@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import Logo from '../ui/logo/Logo';
-import Cart from '../cart/Cart';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Logo from '@components/ui/logo/Logo';
+import Cart, { TMapStateToProps } from '@components/cart/Cart';
 import BasketButton from '../ui/buttons/basketButton/BasketButton';
 
 import './style.scss';
 
 
-interface IProps {
+const mapStateToProps: TMapStateToProps = (state) => ({
+  cart: {
+    products: state.cart.products,
+    total: state.cart.total,
+  },
+});
+
+
+interface IProps extends ReturnType<typeof mapStateToProps> {
   children?: React.ReactNode;
   className?: string;
 }
 
-const Navigation: React.FC<IProps> = ({ className }) => {
+
+const Navigation: React.FC<IProps> = ({ className, cart }) => {
+  const { products } = cart;
   const [isBasketOpened, setBasketOpened] = useState<boolean>(false);
 
   const onBasketClick = (e: React.SyntheticEvent<HTMLButtonElement>, state: boolean): void => {
@@ -29,7 +41,13 @@ const Navigation: React.FC<IProps> = ({ className }) => {
         </div>
 
         {
-          isBasketOpened && <Cart className="Navigation__cart" />
+          isBasketOpened && (
+            <Cart className="Navigation__cart">
+              {products.length > 0 && (
+                <Link className="Navigation__checkout-button" to="/checkout">Checkout</Link>
+              )}
+            </Cart>
+          )
         }
 
       </div>
@@ -37,4 +55,4 @@ const Navigation: React.FC<IProps> = ({ className }) => {
   );
 };
 
-export default Navigation;
+export default connect(mapStateToProps)(Navigation);

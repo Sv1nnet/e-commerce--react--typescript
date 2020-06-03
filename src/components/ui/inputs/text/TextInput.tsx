@@ -33,11 +33,12 @@ const TextInput: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (pro
     name,
     placeholder,
     defaultValue,
+    type = 'text',
   } = props;
 
   return (
     <input
-      type="text"
+      type={type}
       name={name}
       id={id}
       className={`TextInput ${className || ''}`}

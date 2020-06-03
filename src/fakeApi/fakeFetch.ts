@@ -1,5 +1,5 @@
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
-import { IProduct } from '@/reducers/types';
+import { IProduct, TProductInCart } from '@/reducers/types';
 import { getDiscountMultiplier } from '@/reducers/rootReducer';
 import { allItems } from './stringifiedItems';
 
@@ -26,9 +26,19 @@ export interface IProductsRes {
 }
 
 export interface IPaymentData {
-  address: string;
+  firstName: string;
+  lastName: string;
   phone: string;
-  itemIds: string[];
+  email: string;
+  address: string;
+  cardOwner: string;
+  cardNumber: string;
+  expiration: {
+    month: string;
+    year: string;
+  };
+  cvv: string;
+  items: TProductInCart[];
 }
 
 export interface IData {
@@ -144,15 +154,17 @@ const fakeFetch: <T = {} | IData | IProductsRes>(route: TRoute, data?: IFilterRe
   }
 
   return new Promise<IRes<any>>((res, rej) => {
-    if (route === routes.main) {
-      res(handleMainReq());
-    } else if (route === routes.catalog) {
-      res(handleCatalogReq(data));
-    } if (route === routes.pay) {
-      res(handlePayReq());
-    } else {
-      rej(new Error('Wrong route in a query'));
-    }
+    setTimeout(() => {
+      if (route === routes.main) {
+        res(handleMainReq());
+      } else if (route === routes.catalog) {
+        res(handleCatalogReq(data));
+      } if (route === routes.pay) {
+        res(handlePayReq());
+      } else {
+        rej(new Error('Wrong route in a query'));
+      }
+    }, 1500);
   });
 };
 

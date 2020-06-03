@@ -1,5 +1,5 @@
-import { Dispatch, Action } from 'redux';
-import { TState, IProduct, TProductInCart } from '@/reducers/types';
+import { Dispatch } from 'redux';
+import { TState, TProductInCart } from '@/reducers/types';
 import fakeFetch, { IRes, IPaymentData, IData } from '@/fakeApi/fakeFetch';
 import { cartTypes, paymentTypes } from './actionTypes';
 
@@ -60,11 +60,11 @@ export const makePayment: TMakePayment = (paymentData) => (dispatch, getState) =
 
   return fakeFetch('/pay', paymentData)
     .then((res: IRes<IData>) => {
-      dispatch({ type: paymentTypes.MAKE_PAYMENT, data: res.data });
-      return res;
+      // Simulate internet latency for 1.5s
+      return new Promise<IRes<IData>>((resolve) => {
+        dispatch({ type: paymentTypes.MAKE_PAYMENT, data: res.data });
+        resolve(res);
+      });
     })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
+    .catch((err) => err);
 };

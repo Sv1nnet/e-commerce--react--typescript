@@ -28,26 +28,24 @@ export type TAddToCart = (item: TProductInCart) => void;
 export type TRemoveFromCart = (id: string) => void;
 export type TChangeProductNumber = (item: TProductInCart) => void;
 
-interface IProps extends ReturnType<typeof mapDispatchToProps> {}
+interface IProps extends ReturnType<typeof mapDispatchToProps> { }
 
 
-const App: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
-  return (
-    <div className="App">
-      <Navigation />
+const App: React.FC<IProps> = ({ addToCart, removeFromCart }) => (
+  <div className="App">
+    <Navigation />
 
-      <div className="App__inner">
-        <FilterContextProvider>
-          <MainSection
-            className="App__main-section"
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
-          />
-        </FilterContextProvider>
-      </div>
+    <div className="App__inner">
+      <FilterContextProvider>
+        <MainSection
+          className="App__main-section"
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+        />
+      </FilterContextProvider>
     </div>
-  );
-};
+  </div>
+);
 
 
 export default connect(null, mapDispatchToProps)(App);
