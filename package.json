@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
     "start": "cross-env NODE_ENV=development NODE_IP=testip webpack-dev-server --mode development --open",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
     "test": "mocha --require ts-node/register --require mock-local-storage --project tsconfig.ts src/**/*.spec.ts src/**/*.spec.js"
