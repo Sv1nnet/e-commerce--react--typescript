@@ -4,7 +4,7 @@ import { TRemoveFromCart } from '@components/app/App';
 import TextInput, { TChangeHandler } from '@/components/ui/inputs/text/TextInput';
 import SimpleButton from '@/components/ui/buttons/simpleButton/SimpleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 
 import './style.scss';
 

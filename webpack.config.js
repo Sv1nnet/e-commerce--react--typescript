@@ -6,9 +6,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Move css in 
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin'); // Minify css files
 const TerserWebpackPlugin = require('terser-webpack-plugin'); // Minify js files
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+require('dotenv').config();
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
+
+const HOST = isDev ? process.env.DEV_HOST : process.env.HOST;
+const PORT = isDev ? process.env.DEV_PORT : process.env.PORT;
+const IP = `${HOST}${PORT ? `:${PORT}` : ''}`;
 
 const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
@@ -91,10 +96,11 @@ const plugins = () => {
   const base = [
     new HTMLWebpackPlugin({ // injects files into .html
       template: './index.html', // set source .html file
+      IP,
       minify: {
         collapseWhitespace: isProd, // remove whitespace from .html file
       },
-      inject: false,
+      inject: true,
     }),
     new CleanWebpackPlugin(), // clean dist from old files
     new CopyWebpackPlugin([ // Copy any files
@@ -104,7 +110,7 @@ const plugins = () => {
       },
     ]),
     new MiniCssExtractPlugin({ // move css in separated file
-      filename: filename('.css'),
+      filename: filename('css'),
     }),
   ];
 
@@ -142,8 +148,8 @@ module.exports = {
   },
   optimization: optimization(), // allows to move multiple imports in a single separated file
   devServer: {
-    host: '192.168.0.11',
-    port: 4200,
+    host: HOST,
+    port: PORT,
     open: true,
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'src'),

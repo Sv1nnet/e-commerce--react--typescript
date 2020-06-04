@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons/faShoppingBasket';
 
 import { TProductInCart } from '@/components/cart/Cart';
 import { TState } from '../../../../reducers/types';
@@ -26,10 +26,7 @@ const mapStateToProps: IMapState = (state) => ({
 
 
 const BasketButton: React.FC<IProps> = ({ className, numberOfItems, onClick, isActive }) => {
-  // const [isActive, setIsActive] = useState<boolean>(false);
-
   const buttonAction: React.EventHandler<TButtonEvent> = (e: TButtonEvent) => {
-    // setIsActive(!isActive);
     if (onClick) onClick(e, !isActive);
   };
 
