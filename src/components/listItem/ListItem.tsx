@@ -7,13 +7,10 @@ interface IProps {
   className?: string;
 }
 
-const ListItem: React.FC<IProps> = ({ children, className }) => {
-
-  return (
-    <li className={`ListItem ${className || ''}`}>
-      {children}
-    </li>
-  );
-};
+const ListItem: React.FC<IProps> = ({ children, className }) => (
+  <li className={`ListItem ${className || ''}`}>
+    {children}
+  </li>
+);
 
 export default ListItem;

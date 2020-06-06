@@ -6,8 +6,16 @@ import { TState, TProductInCart } from '@/reducers/types';
 import Navigation from '@components/navigation/Navigation';
 import MainSection from '@components/mainSection/MainSection';
 
-import { addToCart as addToCartAction, removeFromCart as removeFromCartAction, IAddToCartAction, IRemoveFromCartAction, IChangeProductNumberAction } from '@/actions/cartActions';
+import {
+  addToCart as addToCartAction,
+  removeFromCart as removeFromCartAction,
+  IAddToCartAction,
+  IRemoveFromCartAction,
+  IChangeProductNumberAction,
+} from '@/actions/cartActions';
+
 import FilterContextProvider from '@components/contexts/filter/FilterContext';
+
 import './style.scss';
 
 

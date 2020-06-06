@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development NODE_IP=testip webpack-dev-server --mode development --open",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json",
-    "test": "mocha --require ts-node/register --require mock-local-storage --project tsconfig.ts src/**/*.spec.ts src/**/*.spec.js"
+    "test": "mocha --require ts-node/register --require mock-local-storage --project tsconfig.ts src/**/*.spec.ts src/**/*.spec.js",
+    "deploy": "gh-pages -d dist"
   },
   "browserslist": "> 0.25%, not dead",
   "keywords": [
@@ -21,6 +22,7 @@
     "@components": "src/components"
   },
   "author": "",
+  "homepage": "https://sv1nnet.github.io/e-commerce-with-react-and-ts",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -49,6 +51,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^7.1.2",

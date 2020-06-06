@@ -4,14 +4,10 @@ interface IProps {
   children?: React.ReactNode;
 }
 
-const CheckoutPage: React.FC<IProps> = (props) => {
-  const { children } = props;
-
-  return (
-    <>
-      {children}
-    </>
-  );
-};
+const CheckoutPage: React.FC<IProps> = ({ children }) => (
+  <>
+    {children}
+  </>
+);
 
 export default CheckoutPage;

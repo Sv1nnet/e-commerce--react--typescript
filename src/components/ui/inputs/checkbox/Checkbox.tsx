@@ -7,7 +7,6 @@ import './style.scss';
 
 
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
-type ChangeHandler = (e: InputChangeEvent) => void;
 
 interface IProps {
   text: string;
