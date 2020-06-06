@@ -38,7 +38,7 @@ const Navigation: React.FC<IProps> = ({ className, cart }) => {
   // Hide cart if the target of a click event is Checkout button or is not a cart
   useEffect(() => {
     if (isCartOpened) {
-      window.addEventListener<'click'>('click', hideCart);
+      window.addEventListener<'mousedown'>('mousedown', hideCart);
     }
 
     return () => window.removeEventListener<'click'>('click', hideCart);
