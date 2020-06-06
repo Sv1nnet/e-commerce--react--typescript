@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from '@components/ui/logo/Logo';
 import Cart, { TMapStateToProps } from '@components/cart/Cart';
 import BasketButton from '../ui/buttons/basketButton/BasketButton';
+import routes from '@components/routes/routes';
 
 import './style.scss';
 
@@ -69,7 +70,7 @@ const Navigation: React.FC<IProps> = ({ className, cart }) => {
           isCartOpened && (
             <Cart className="Navigation__cart">
               {products.length > 0 && (
-                <Link className="Navigation__checkout-button" to="/checkout">Checkout</Link>
+                <Link className="Navigation__checkout-button" to={`${routes.default}/checkout`}>Checkout</Link>
               )}
             </Cart>
           )

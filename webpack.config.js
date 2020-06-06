@@ -101,6 +101,7 @@ const plugins = () => {
         collapseWhitespace: isProd, // remove whitespace from .html file
       },
       inject: true,
+      baseTag: isDev ? `<base href="http://${IP}" />` : '<base href="https://sv1nnet.github.io/e-commerce--react--typescript/" />',
     }),
     new CleanWebpackPlugin(), // clean dist from old files
     new CopyWebpackPlugin([ // Copy any files

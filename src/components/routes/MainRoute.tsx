@@ -6,6 +6,7 @@ import MainPage from '@components/pages/mainPage/MainPage';
 import SimpleButton from '@components/ui/buttons/simpleButton/SimpleButton';
 import Main from '@components/main/Main';
 import SideBar from '@components/sidebar/SideBar';
+import routes from '@components/routes/routes';
 
 
 interface IProps extends TMappedDispatch {
@@ -30,7 +31,7 @@ const MainRoute: React.FC<IProps> = ({ addToCart, removeFromCart }) => {
       />
 
       <Switch>
-        <Route exact path="/">
+        <Route exact path={routes.default}>
           <Main addToCart={addToCart} removeFromCart={removeFromCart} />
         </Route>
       </Switch>
