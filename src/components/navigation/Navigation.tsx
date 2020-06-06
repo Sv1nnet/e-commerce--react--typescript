@@ -30,18 +30,29 @@ const Navigation: React.FC<IProps> = ({ className, cart }) => {
     setBasketOpened(state);
   };
 
-  const hideCart = useCallback((e: MouseEvent) => {
+  // If we click on checkout button the cart is hidden before onClick on checkout button uccurred,
+  // so we need handle it with another event handler
+  const hideCartOnMouseDown = useCallback((e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (target && (!target.closest('.Navigation__cart') || target.classList.contains('Navigation__checkout-button'))) setBasketOpened(false);
+    if (target && !target.closest('.Navigation__cart') && !target.closest('.BasketButton')) setBasketOpened(false);
+  }, []);
+
+  const hideCartOnCheckoutButtonClick = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('Navigation__checkout-button')) setBasketOpened(false);
   }, []);
 
   // Hide cart if the target of a click event is Checkout button or is not a cart
   useEffect(() => {
     if (isCartOpened) {
-      window.addEventListener<'mousedown'>('mousedown', hideCart);
+      window.addEventListener<'mousedown'>('mousedown', hideCartOnMouseDown);
+      window.addEventListener<'click'>('click', hideCartOnCheckoutButtonClick);
     }
 
-    return () => window.removeEventListener<'click'>('click', hideCart);
+    return () => {
+      window.removeEventListener<'mousedown'>('mousedown', hideCartOnMouseDown);
+      window.removeEventListener<'click'>('click', hideCartOnCheckoutButtonClick);
+    };
   }, [isCartOpened]);
 
   return (
