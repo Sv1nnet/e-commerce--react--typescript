@@ -108,6 +108,10 @@ const plugins = () => {
         from: path.resolve(__dirname, 'src/fav.ico'),
         to: path.resolve(__dirname, 'dist'),
       },
+      {
+        from: path.resolve(__dirname, 'src/assets/**/*.*'),
+        to: path.resolve(__dirname, 'dist'),
+      },
     ]),
     new MiniCssExtractPlugin({ // move css in separated file
       filename: filename('css'),

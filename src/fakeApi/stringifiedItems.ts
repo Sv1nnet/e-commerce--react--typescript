@@ -6,7 +6,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 1199,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-s20_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-s20_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -16,7 +16,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 699,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-s10-lite_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-s10-lite_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -26,7 +26,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 900,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-note10_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-note10_phone.jpg",
       "discount": 10,
       "available": true
     },
@@ -36,7 +36,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 2000,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-flip_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-flip_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -48,7 +48,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 249,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-8-pro_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-redmi-note-8-pro_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -58,7 +58,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 169,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-redmi-note-7_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -68,7 +68,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 549,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-mi-note10_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-mi-note10_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -78,7 +78,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 399,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-mi-mix-2s_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-mi-mix-2s_phone.jpg",
       "discount": 15,
       "available": true
     },
@@ -88,7 +88,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 599,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-mi-9t-pro_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-mi-9t-pro_phone.jpg",
       "discount": 0,
       "available": false
     },
@@ -98,7 +98,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 499,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-mi-9t_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-mi-9t_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -110,7 +110,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 749,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-xr_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-xr_phone.jpg",
       "discount": 10,
       "available": true
     },
@@ -120,7 +120,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 1399,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-11pro_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-11pro_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -130,7 +130,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 349,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-8p_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-8p_phone.jpg",
       "discount": 0,
       "available": false
     },
@@ -140,7 +140,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 299,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-6s_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-6s_phone.jpg",
       "discount": 15,
       "available": true
     }
@@ -152,7 +152,7 @@ export const allItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 99,
       "type": "buttons",
-      "img": "../assets/img/items/buttons_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/buttons_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -167,7 +167,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 1199,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-s20_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-s20_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -177,7 +177,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 699,
       "type": "touchscreen",
-      "img": "../assets/img/items/samsung-s10-lite_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/samsung-s10-lite_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -189,7 +189,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 249,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-8-pro_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-redmi-note-8-pro_phone.jpg",
       "discount": 0,
       "available": true
     },
@@ -199,7 +199,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 169,
       "type": "touchscreen",
-      "img": "../assets/img/items/xiaomi-redmi-note-7_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/xiaomi-redmi-note-7_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -211,7 +211,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 749,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-xr_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-xr_phone.jpg",
       "discount": 10,
       "available": true
     },
@@ -221,7 +221,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 1399,
       "type": "touchscreen",
-      "img": "../assets/img/items/iphone-11pro_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/iphone-11pro_phone.jpg",
       "discount": 0,
       "available": true
     }
@@ -233,7 +233,7 @@ export const mainItems = JSON.stringify({
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, repudiandae esse laborum magnam id consequatur veniam repellat facilis dicta mollitia.",
       "price": 99,
       "type": "buttons",
-      "img": "../assets/img/items/buttons_phone.jpg",
+      "img": "https://raw.githubusercontent.com/Sv1nnet/e-commerce--react--typescript/gh-pages/assets/img/items/buttons_phone.jpg",
       "discount": 0,
       "available": true
     }
