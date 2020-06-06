@@ -2,7 +2,6 @@ import 'module-alias/register';
 import { expect } from 'chai';
 
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
-import { IProduct } from '@/reducers/types';
 import fakeFetch, { IData } from '../fakeFetch';
 import { mainItems as mainItemsStr, allItems as allItemsStr } from '../stringifiedItems';
 

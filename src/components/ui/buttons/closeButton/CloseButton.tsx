@@ -13,12 +13,10 @@ interface IProps {
 }
 
 
-const CloseButton: React.FC<IProps> = ({ className = '', iconClassName = '', onClick }) => {
-  return (
-    <button type="button" onClick={onClick} className={`CloseButton ${className}`}>
-      <FontAwesomeIcon className={iconClassName} icon={faPlus} />
-    </button>
-  );
-};
+const CloseButton: React.FC<IProps> = ({ className = '', iconClassName = '', onClick }) => (
+  <button type="button" onClick={onClick} className={`CloseButton ${className}`}>
+    <FontAwesomeIcon className={iconClassName} icon={faPlus} />
+  </button>
+);
 
 export default CloseButton;
