@@ -72,7 +72,7 @@ const CheckoutForm: React.FC<IProps> = ({ className, items, makePayment }) => {
     success: null,
     error: null,
   });
-  const { register, handleSubmit, getValues, setValue, errors } = useForm<TFormData>({
+  const { register, handleSubmit, getValues, setValue, errors, setError } = useForm<TFormData>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -93,6 +93,19 @@ const CheckoutForm: React.FC<IProps> = ({ className, items, makePayment }) => {
   const onSubmit: OnSubmit<TFormData> = (data, e) => {
     if (e) e.preventDefault();
 
+    if (items.some((item) => item.number < 1)) {
+      const message = 'One or more items in the cart has 0 amount';
+      setError('amount', { message });
+      setStatus({
+        loading: false,
+        success: null,
+        error: {
+          code: 0,
+          text: message,
+        },
+      });
+      return;
+    }
     setStatus((prevStatus) => ({ ...prevStatus, loading: true }));
 
     const paymentData: IPaymentData = {
