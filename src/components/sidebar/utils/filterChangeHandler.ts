@@ -32,6 +32,7 @@ const filterChangeHandler: IFilterChanger = {
   },
   brands: (target, filterState) => {
     const newFilter = { ...filterState };
+    newFilter.brands = [...filterState.brands];
 
     if (target.checked) {
       newFilter.brands.push(target.name);

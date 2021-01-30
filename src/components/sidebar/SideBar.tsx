@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Checkbox from '@components/ui/inputs/checkbox/Checkbox';
 import Rollup from '@components/ui/rollup/Rollup';
@@ -77,6 +77,10 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
     hideSideBar();
   };
 
+  useEffect(() => {
+    setFilter(filterData);
+  }, [filterData]);
+
   return (
     <>
       <aside>
@@ -92,7 +96,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Discount"
                 name="discount"
                 id="discount"
-                defaultChecked={filter.discount}
+                checked={filter.discount}
                 onChange={onChange}
               />
             </div>
@@ -129,7 +133,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Apple"
                 name="Apple"
                 id="apple"
-                defaultChecked={filter.brands.includes('Apple')}
+                checked={filter.brands.includes('Apple')}
                 onChange={onChange}
               />
               <Checkbox
@@ -138,7 +142,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="FinePower"
                 name="FinePower"
                 id="finepower"
-                defaultChecked={filter.brands.includes('FinePower')}
+                checked={filter.brands.includes('FinePower')}
                 onChange={onChange}
               />
               <Checkbox
@@ -147,7 +151,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Samsung"
                 name="Samsung"
                 id="samsung"
-                defaultChecked={filter.brands.includes('Samsung')}
+                checked={filter.brands.includes('Samsung')}
                 onChange={onChange}
               />
               <Checkbox
@@ -156,7 +160,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Xiaomi"
                 name="Xiaomi"
                 id="xiaomi"
-                defaultChecked={filter.brands.includes('Xiaomi')}
+                checked={filter.brands.includes('Xiaomi')}
                 onChange={onChange}
               />
             </Rollup>
@@ -168,7 +172,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Buttons"
                 name="buttons"
                 id="buttons"
-                defaultChecked={filter.type.buttons}
+                checked={filter.type.buttons}
                 onChange={onChange}
               />
               <Checkbox
@@ -177,7 +181,7 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
                 text="Touch screen"
                 name="touchscreen"
                 id="touchscreen"
-                defaultChecked={filter.type.touchscreen}
+                checked={filter.type.touchscreen}
                 onChange={onChange}
               />
             </Rollup>

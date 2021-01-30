@@ -1,5 +1,6 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 
@@ -18,6 +19,7 @@ interface IProps {
   name?: string;
   className?: string;
   defaultChecked?: boolean,
+  checked?: boolean,
 }
 
 
@@ -32,12 +34,16 @@ const Checkbox: React.FC<IProps> = (props) => {
     onChange,
   } = props;
 
-  const [checked, setChecked] = useState<boolean>(defaultChecked);
+  const [checked, setChecked] = useState<boolean>(props.checked ?? defaultChecked);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setChecked(!checked);
+    if (props.checked === undefined) setChecked(!checked);
     onChange(e, !checked);
   };
+
+  useEffect(() => {
+    if (props.checked !== undefined) setChecked(props.checked);
+  }, [props.checked]);
 
   return (
     <label className={`Checkbox ${className || ''}`} htmlFor={id}>

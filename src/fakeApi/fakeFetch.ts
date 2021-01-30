@@ -1,7 +1,7 @@
 import { IFilterResult } from '@components/contexts/filter/FilterContext';
 import { IProduct, TProductInCart } from '@/reducers/types';
 import { getDiscountMultiplier } from '@/reducers/rootReducer';
-import { allItems } from './stringifiedItems';
+import { allItems, mainItems } from './stringifiedItems';
 
 
 type TRoute = '/' | '/catalog' | '/pay';
@@ -123,7 +123,7 @@ const handleCatalogReq: (filter: any) => IRes<IFiltered> = (filter = {
 const handleMainReq: () => IRes<IProductsRes> = () => ({
   status: 200,
   text: 'OK',
-  data: JSON.parse(allItems),
+  data: JSON.parse(mainItems),
 });
 
 const handlePayReq: () => IRes<{}> = () => ({

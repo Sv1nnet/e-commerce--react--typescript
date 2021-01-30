@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { TMappedDispatch } from '@components/app/App';
 import { IProduct } from '@/reducers/types';
 import Card from '@components/card/Card';
@@ -17,25 +17,31 @@ const Main: React.FC<IProps> = ({ addToCart }) => {
   const [products, setProducts] = useState<IProductsRes>({});
   const [loading, setLoading] = useState<boolean>(false);
   const productsToRender: IProduct[] = [];
-  const { filterData } = useContext(FilterContext);
-
+  const { filterData, resetFilter } = useContext(FilterContext);
+  const loadingFilterPermitted = useRef(false);
 
   useEffect(() => {
+    resetFilter();
+
     setLoading(true);
-    fakeFetch<IProductsRes>('/').then((res) => {
-      const { data } = res;
-      setProducts(data);
-      setLoading(false);
-    });
+    fakeFetch<IProductsRes>('/')
+      .then((res) => {
+        const { data } = res;
+        setProducts(data);
+        setLoading(false);
+      })
+      .finally(() => { loadingFilterPermitted.current = true; });
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    fakeFetch<IProductsRes>('/catalog', filterData).then((res) => {
-      const { data } = res;
-      setProducts(data);
-      setLoading(false);
-    });
+    if (loadingFilterPermitted.current === true) {
+      setLoading(true);
+      fakeFetch<IProductsRes>('/catalog', filterData).then((res) => {
+        const { data } = res;
+        setProducts(data);
+        setLoading(false);
+      });
+    }
   }, [filterData]);
 
 

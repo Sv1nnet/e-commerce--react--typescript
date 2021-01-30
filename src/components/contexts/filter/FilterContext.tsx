@@ -14,9 +14,11 @@ export interface IFilterResult {
 }
 
 export type TUpdateFilter = React.Dispatch<React.SetStateAction<IFilterResult>>;
+export type TResetFilter = Function;
 export interface IContextValue {
   filterData: IFilterResult,
   updateFilter: TUpdateFilter,
+  resetFilter: TResetFilter,
 }
 
 interface IProps {
@@ -24,17 +26,20 @@ interface IProps {
 }
 
 
-const defaultContextValue: IContextValue = {
-  filterData: {
-    discount: false,
-    price: ['', ''],
-    brands: [],
-    type: {
-      touchscreen: false,
-      buttons: false,
-    },
+const defaultFilterData: IFilterResult = {
+  discount: false,
+  price: ['', ''],
+  brands: [],
+  type: {
+    touchscreen: false,
+    buttons: false,
   },
+};
+
+const defaultContextValue: IContextValue = {
+  filterData: defaultFilterData,
   updateFilter: () => {},
+  resetFilter: () => {},
 };
 
 export const FilterContext = createContext<IContextValue>(defaultContextValue);
@@ -52,11 +57,14 @@ const FilterContextProvider: React.FC<IProps> = (props) => {
     },
   });
 
+  const resetFilter: TResetFilter = () => setFilterResult(defaultFilterData);
+
   return (
     <FilterContext.Provider
       value={{
         filterData: filterResult,
         updateFilter: setFilterResult,
+        resetFilter,
       }}
     >
       {children}
