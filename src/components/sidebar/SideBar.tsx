@@ -24,7 +24,7 @@ interface IProps {
 
 
 const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen, className }) => {
-  const { filterData, updateFilter } = useContext<IContextValue>(FilterContext);
+  const { filterData, updateFilter, resetFilter: ctxResetFilter, defaultFilterData } = useContext<IContextValue>(FilterContext);
 
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
   const [filter, setFilter] = useState<IFilterResult>(filterData); // Filter to render in Sidebar
@@ -55,6 +55,12 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
 
       return newFilter;
     });
+  };
+
+  const resetFilter: () => void = () => {
+    setFilter(defaultFilterData);
+    ctxResetFilter();
+    setFilterChanged(false);
   };
 
   const hideSideBar = () => {
@@ -187,10 +193,17 @@ const SideBar: React.FC<IProps> = ({ showSideBar, isSideBarActiveOnMediumScreen,
             </Rollup>
 
             <SimpleButton
-              className="SideBar__apply-button SideBar__apply-button_md_active"
-              textClassName="SideBar__apply-button-text"
+              className="SideBar__button SideBar__apply-button SideBar__apply-button_md_active"
+              textClassName="SideBar__button-text"
               value="Apply"
               onClick={submitFilterChange}
+            />
+
+            <SimpleButton
+              className="SideBar__button"
+              textClassName="SideBar__button-text"
+              value="Reset filter"
+              onClick={resetFilter}
             />
 
           </div>

@@ -17,6 +17,7 @@ export type TUpdateFilter = React.Dispatch<React.SetStateAction<IFilterResult>>;
 export type TResetFilter = Function;
 export interface IContextValue {
   filterData: IFilterResult,
+  defaultFilterData: IFilterResult,
   updateFilter: TUpdateFilter,
   resetFilter: TResetFilter,
 }
@@ -38,6 +39,7 @@ const defaultFilterData: IFilterResult = {
 
 const defaultContextValue: IContextValue = {
   filterData: defaultFilterData,
+  defaultFilterData,
   updateFilter: () => {},
   resetFilter: () => {},
 };
@@ -63,6 +65,7 @@ const FilterContextProvider: React.FC<IProps> = (props) => {
     <FilterContext.Provider
       value={{
         filterData: filterResult,
+        defaultFilterData,
         updateFilter: setFilterResult,
         resetFilter,
       }}
